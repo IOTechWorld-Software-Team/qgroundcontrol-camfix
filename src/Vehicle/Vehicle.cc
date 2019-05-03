@@ -1582,6 +1582,13 @@ void Vehicle::_handleBatteryStatus(mavlink_message_t& message)
         batteryFactGroup.mahConsumed()->setRawValue(bat_status.current_consumed);
     }
 
+    if (bat_status.current_generator == INT16_MAX) {
+        batteryFactGroup.current_generator()->setRawValue(VehicleBatteryFactGroup::_currentgeneratorUnavailable);
+    } else {
+        batteryFactGroup.current_generator()->setRawValue((double)bat_status.current_generator / 100.0);
+    }
+
+
     int cellCount = 0;
     for (int i=0; i<10; i++) {
         if (bat_status.voltages[i] != UINT16_MAX) {
@@ -3854,6 +3861,7 @@ const char* VehicleBatteryFactGroup::_voltageFactName =                     "vol
 const char* VehicleBatteryFactGroup::_percentRemainingFactName =            "percentRemaining";
 const char* VehicleBatteryFactGroup::_mahConsumedFactName =                 "mahConsumed";
 const char* VehicleBatteryFactGroup::_currentFactName =                     "current";
+const char* VehicleBatteryFactGroup::_currentgeneratorFactName =            "current gen";
 const char* VehicleBatteryFactGroup::_temperatureFactName =                 "temperature";
 const char* VehicleBatteryFactGroup::_cellCountFactName =                   "cellCount";
 const char* VehicleBatteryFactGroup::_instantPowerFactName =                "instantPower";
@@ -3866,6 +3874,7 @@ const double VehicleBatteryFactGroup::_voltageUnavailable =           -1.0;
 const int    VehicleBatteryFactGroup::_percentRemainingUnavailable =  -1;
 const int    VehicleBatteryFactGroup::_mahConsumedUnavailable =       -1;
 const int    VehicleBatteryFactGroup::_currentUnavailable =           -1;
+const int    VehicleBatteryFactGroup::_currentgeneratorUnavailable =  -1;
 const double VehicleBatteryFactGroup::_temperatureUnavailable =       -1.0;
 const int    VehicleBatteryFactGroup::_cellCountUnavailable =         -1.0;
 const double VehicleBatteryFactGroup::_instantPowerUnavailable =      -1.0;
@@ -3876,6 +3885,7 @@ VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     , _percentRemainingFact         (0, _percentRemainingFactName,          FactMetaData::valueTypeInt32)
     , _mahConsumedFact              (0, _mahConsumedFactName,               FactMetaData::valueTypeInt32)
     , _currentFact                  (0, _currentFactName,                   FactMetaData::valueTypeFloat)
+    , _currentgeneratorFact         (0, _currentgeneratorFactName,          FactMetaData::valueTypeFloat)
     , _temperatureFact              (0, _temperatureFactName,               FactMetaData::valueTypeDouble)
     , _cellCountFact                (0, _cellCountFactName,                 FactMetaData::valueTypeInt32)
     , _instantPowerFact             (0, _instantPowerFactName,              FactMetaData::valueTypeFloat)
@@ -3886,6 +3896,7 @@ VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     _addFact(&_percentRemainingFact,        _percentRemainingFactName);
     _addFact(&_mahConsumedFact,             _mahConsumedFactName);
     _addFact(&_currentFact,                 _currentFactName);
+    _addFact(&_currentgeneratorFact,        _currentgeneratorFactName);
     _addFact(&_temperatureFact,             _temperatureFactName);
     _addFact(&_cellCountFact,               _cellCountFactName);
     _addFact(&_instantPowerFact,            _instantPowerFactName);
@@ -3897,6 +3908,7 @@ VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     _percentRemainingFact.setRawValue   (_percentRemainingUnavailable);
     _mahConsumedFact.setRawValue        (_mahConsumedUnavailable);
     _currentFact.setRawValue            (_currentUnavailable);
+    _currentgeneratorFact.setRawValue   (_currentgeneratorUnavailable);
     _temperatureFact.setRawValue        (_temperatureUnavailable);
     _cellCountFact.setRawValue          (_cellCountUnavailable);
     _instantPowerFact.setRawValue       (_instantPowerUnavailable);

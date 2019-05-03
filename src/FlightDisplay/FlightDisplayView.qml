@@ -717,6 +717,14 @@ QGCView {
         }
     }
 
+    //-- QH Instruments
+    QHInstruments {
+        id: qhinstruments
+        anchors.margins:    20
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+    }
+
     //-- Airspace Indicator
     Rectangle {
         id:             airspaceIndicator

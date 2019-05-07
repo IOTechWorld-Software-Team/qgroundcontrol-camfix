@@ -1,0 +1,9 @@
+----------------------------QH-DEV README-------------------------
+
+7 May 2019 -----------------
+
+	commit a05aadd9b
+
+		Proof of concept of adding new mavlink message and interpreting it on graphic UI.
+		It has fully functional current_generator new mavlink message under battery_status
+		and it is displayed on qml part

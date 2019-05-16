@@ -262,6 +262,9 @@ public:
     Q_PROPERTY(Fact* instantPower       READ instantPower       CONSTANT)
     Q_PROPERTY(Fact* timeRemaining      READ timeRemaining      CONSTANT)
     Q_PROPERTY(Fact* chargeState        READ chargeState        CONSTANT)
+    Q_PROPERTY(Fact* current_rotor      READ current_rotor      CONSTANT)
+    Q_PROPERTY(Fact* fuel_level         READ fuel_level         CONSTANT)
+    Q_PROPERTY(Fact* throttle_percentage READ throttle_percentage CONSTANT)
 
     Fact* voltage                   (void) { return &_voltageFact; }
     Fact* percentRemaining          (void) { return &_percentRemainingFact; }
@@ -273,6 +276,9 @@ public:
     Fact* instantPower              (void) { return &_instantPowerFact; }
     Fact* timeRemaining             (void) { return &_timeRemainingFact; }
     Fact* chargeState               (void) { return &_chargeStateFact; }
+    Fact* current_rotor             (void) { return &_currentrotorFact; }
+    Fact* fuel_level                (void) { return &_fuellevelFact; }
+    Fact* throttle_percentage       (void) { return &_throttlepercentageFact; }
 
     static const char* _voltageFactName;
     static const char* _percentRemainingFactName;
@@ -284,6 +290,9 @@ public:
     static const char* _instantPowerFactName;
     static const char* _timeRemainingFactName;
     static const char* _chargeStateFactName;
+    static const char* _currentrotorFactName;
+    static const char* _fuellevelFactName;
+    static const char* _throttlepercentageFactName;
 
     static const char* _settingsGroup;
 
@@ -295,6 +304,9 @@ public:
     static const double _temperatureUnavailable;
     static const int    _cellCountUnavailable;
     static const double _instantPowerUnavailable;
+    static const double _currentrotorUnavailable;
+    static const double _fuellevelUnavailable;
+    static const double _throttlepercentageUnavailable;
 
 private:
     Fact            _voltageFact;
@@ -307,6 +319,9 @@ private:
     Fact            _instantPowerFact;
     Fact            _timeRemainingFact;
     Fact            _chargeStateFact;
+    Fact            _currentrotorFact;
+    Fact            _fuellevelFact;
+    Fact            _throttlepercentageFact;
 };
 
 class VehicleTemperatureFactGroup : public FactGroup

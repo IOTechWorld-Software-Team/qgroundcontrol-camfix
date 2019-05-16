@@ -720,7 +720,8 @@ QGCView {
     //-- QH Instruments
     QHInstruments {
         id: qhinstruments
-        anchors.margins:    20
+        anchors.rightMargin:  10
+        anchors.bottomMargin: 50
         anchors.bottom: parent.bottom
         anchors.right: parent.right
     }

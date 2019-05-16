@@ -1576,17 +1576,38 @@ void Vehicle::_handleBatteryStatus(mavlink_message_t& message)
     } else {
         batteryFactGroup.temperature()->setRawValue((double)bat_status.temperature / 100.0);
     }
+
     if (bat_status.current_consumed == -1) {
         batteryFactGroup.mahConsumed()->setRawValue(VehicleBatteryFactGroup::_mahConsumedUnavailable);
     } else {
         batteryFactGroup.mahConsumed()->setRawValue(bat_status.current_consumed);
     }
 
-    if (bat_status.current_generator == INT16_MAX) {
+    if (bat_status.current_generator == -1) {
         batteryFactGroup.current_generator()->setRawValue(VehicleBatteryFactGroup::_currentgeneratorUnavailable);
     } else {
         batteryFactGroup.current_generator()->setRawValue((double)bat_status.current_generator / 100.0);
     }
+
+    if (bat_status.current_rotor == -1) {
+        batteryFactGroup.current_rotor()->setRawValue(VehicleBatteryFactGroup::_currentrotorUnavailable);
+    } else {
+        batteryFactGroup.current_rotor()->setRawValue((double)bat_status.current_rotor / 100.0);
+    }
+
+    if (bat_status.fuel_level == -1) {
+        batteryFactGroup.fuel_level()->setRawValue(VehicleBatteryFactGroup::_fuellevelUnavailable);
+    } else {
+        batteryFactGroup.fuel_level()->setRawValue((double)bat_status.fuel_level);
+    }
+
+    if (bat_status.throttle_percentage == -1) {
+        batteryFactGroup.throttle_percentage()->setRawValue(VehicleBatteryFactGroup::_throttlepercentageUnavailable);
+    } else {
+        batteryFactGroup.throttle_percentage()->setRawValue((double)bat_status.throttle_percentage);
+    }
+
+
 
 
     int cellCount = 0;
@@ -3861,23 +3882,29 @@ const char* VehicleBatteryFactGroup::_voltageFactName =                     "vol
 const char* VehicleBatteryFactGroup::_percentRemainingFactName =            "percentRemaining";
 const char* VehicleBatteryFactGroup::_mahConsumedFactName =                 "mahConsumed";
 const char* VehicleBatteryFactGroup::_currentFactName =                     "current";
-const char* VehicleBatteryFactGroup::_currentgeneratorFactName =            "current gen";
+const char* VehicleBatteryFactGroup::_currentgeneratorFactName =            "currentGen";
 const char* VehicleBatteryFactGroup::_temperatureFactName =                 "temperature";
 const char* VehicleBatteryFactGroup::_cellCountFactName =                   "cellCount";
 const char* VehicleBatteryFactGroup::_instantPowerFactName =                "instantPower";
 const char* VehicleBatteryFactGroup::_timeRemainingFactName =               "timeRemaining";
 const char* VehicleBatteryFactGroup::_chargeStateFactName =                 "chargeState";
+const char* VehicleBatteryFactGroup::_currentrotorFactName =                "currentRotor";
+const char* VehicleBatteryFactGroup::_fuellevelFactName =                   "mlLeftTank";
+const char* VehicleBatteryFactGroup::_throttlepercentageFactName =          "percentThrottle";
 
 const char* VehicleBatteryFactGroup::_settingsGroup =                       "Vehicle.battery";
 
-const double VehicleBatteryFactGroup::_voltageUnavailable =           -1.0;
-const int    VehicleBatteryFactGroup::_percentRemainingUnavailable =  -1;
-const int    VehicleBatteryFactGroup::_mahConsumedUnavailable =       -1;
-const int    VehicleBatteryFactGroup::_currentUnavailable =           -1;
-const int    VehicleBatteryFactGroup::_currentgeneratorUnavailable =  -1;
-const double VehicleBatteryFactGroup::_temperatureUnavailable =       -1.0;
-const int    VehicleBatteryFactGroup::_cellCountUnavailable =         -1.0;
-const double VehicleBatteryFactGroup::_instantPowerUnavailable =      -1.0;
+const double VehicleBatteryFactGroup::_voltageUnavailable =             -1.0;
+const int    VehicleBatteryFactGroup::_percentRemainingUnavailable =    -1;
+const int    VehicleBatteryFactGroup::_mahConsumedUnavailable =         -1;
+const int    VehicleBatteryFactGroup::_currentUnavailable =             -1;
+const int    VehicleBatteryFactGroup::_currentgeneratorUnavailable =    -1;
+const double VehicleBatteryFactGroup::_temperatureUnavailable =         -1.0;
+const int    VehicleBatteryFactGroup::_cellCountUnavailable =           -1.0;
+const double VehicleBatteryFactGroup::_instantPowerUnavailable =        -1.0;
+const double VehicleBatteryFactGroup::_currentrotorUnavailable =        -1;
+const double VehicleBatteryFactGroup::_fuellevelUnavailable =           -1;
+const double VehicleBatteryFactGroup::_throttlepercentageUnavailable =  -1;
 
 VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     : FactGroup(1000, ":/json/Vehicle/BatteryFact.json", parent)
@@ -3891,6 +3918,9 @@ VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     , _instantPowerFact             (0, _instantPowerFactName,              FactMetaData::valueTypeFloat)
     , _timeRemainingFact            (0, _timeRemainingFactName,             FactMetaData::valueTypeInt32)
     , _chargeStateFact              (0, _chargeStateFactName,               FactMetaData::valueTypeUint8)
+    , _currentrotorFact             (0, _currentrotorFactName,              FactMetaData::valueTypeFloat)
+    , _fuellevelFact                (0, _fuellevelFactName,                 FactMetaData::valueTypeInt32)
+    , _throttlepercentageFact       (0, _throttlepercentageFactName,        FactMetaData::valueTypeInt32)
 {
     _addFact(&_voltageFact,                 _voltageFactName);
     _addFact(&_percentRemainingFact,        _percentRemainingFactName);
@@ -3902,6 +3932,9 @@ VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     _addFact(&_instantPowerFact,            _instantPowerFactName);
     _addFact(&_timeRemainingFact,           _timeRemainingFactName);
     _addFact(&_chargeStateFact,             _chargeStateFactName);
+    _addFact(&_currentrotorFact,            _currentrotorFactName);
+    _addFact(&_fuellevelFact,               _fuellevelFactName);
+    _addFact(&_throttlepercentageFact,      _throttlepercentageFactName);
 
     // Start out as not available
     _voltageFact.setRawValue            (_voltageUnavailable);
@@ -3912,6 +3945,9 @@ VehicleBatteryFactGroup::VehicleBatteryFactGroup(QObject* parent)
     _temperatureFact.setRawValue        (_temperatureUnavailable);
     _cellCountFact.setRawValue          (_cellCountUnavailable);
     _instantPowerFact.setRawValue       (_instantPowerUnavailable);
+    _currentrotorFact.setRawValue       (_currentrotorUnavailable);
+    _fuellevelFact.setRawValue          (_fuellevelUnavailable);
+    _throttlepercentageFact.setRawValue (_throttlepercentageUnavailable);
 }
 
 const char* VehicleWindFactGroup::_directionFactName =      "direction";

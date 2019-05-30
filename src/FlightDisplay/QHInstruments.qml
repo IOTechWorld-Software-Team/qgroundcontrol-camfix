@@ -34,9 +34,11 @@ Item {
     id: qhroot
     height: 150
     width: 350
-    //property var barstatus: ["normal","warning","critical"]
-    //property int n_data_displayed: 6
-    
+
+    // Prevent all clicks from going through to lower layers
+    DeadMouseArea {
+        anchors.fill: parent
+    }  
 
     Rectangle {
 
@@ -47,7 +49,6 @@ Item {
 
         GridLayout {
             id:                 qhinstrumentsgrid
-            //anchors.margins:    ScreenTools.defaultFontPixelHeight
             columnSpacing:      ScreenTools.defaultFontPixelWidth
             columns:            3
             anchors.left: parent.left
@@ -72,15 +73,18 @@ Item {
                 text: qsTr("Current:") 
             }
 
+            /*-------------TEST-----------
             ProgressBar {
                 id: progressbarcurrent
 
+                //Position parameters
                 Layout.column: 2
                 Layout.row: 2
                 Layout.preferredHeight: 10
                 Layout.preferredWidth: 125
                 
-                maximumValue: 70
+                //Values and conditions
+                maximumValue: 70    //Max current ever recorded in a peak was 55A
                 indeterminate: (_activeVehicle && _activeVehicle.battery.current.value !== -1) ? false : true
                 value: (_activeVehicle && _activeVehicle.battery.current.value !== -1) ? _activeVehicle.battery.current.value : 0
 
@@ -97,6 +101,30 @@ Item {
                     }
                 }
             }
+            ------------TEST----------*/
+
+            
+            QHProgressBar {
+                
+                id: progressbarcurrent
+
+                Layout.column: 2
+                Layout.row: 2
+
+                //Values and conditions
+                maximumValue: 70    //Max current ever recorded in a peak was 55A
+                indeterminate: (_activeVehicle && _activeVehicle.battery.current.value !== -1) ? false : true
+                value: (_activeVehicle && _activeVehicle.battery.current.value !== -1) ? _activeVehicle.battery.current.value : 0
+
+                style: ProgressBarStyle{
+                    progress: Rectangle {
+                        color: "green"
+                        border.color: "darkred"
+                    }
+                }
+
+            }
+            
 
 
             QGCLabel { 
@@ -115,12 +143,14 @@ Item {
             ProgressBar {
                 id: progressbargenerator
 
+                //Position parameters
                 Layout.column: 2
                 Layout.row: 3
                 Layout.preferredHeight: 10
                 Layout.preferredWidth: 125
                 
-                maximumValue: 70
+                //Values and conditions
+                maximumValue: 70    //Max current the generator produces is 50A
                 indeterminate: (_activeVehicle && _activeVehicle.battery.current_generator.value !== -1) ? false : true
                 value: (_activeVehicle && _activeVehicle.battery.current_generator.value !== -1) ? _activeVehicle.battery.current_generator.value : 0
 
@@ -154,13 +184,15 @@ Item {
             ProgressBar {
                 id: progressbarrotor
 
+                //Position parameters
                 Layout.column: 2
                 Layout.row: 5
                 Layout.preferredHeight: 10
                 Layout.preferredWidth: 125
                 
-                minimumValue: -70
-                maximumValue: 70
+                //Values and conditions
+                minimumValue: -15   //Current provided by governor to batteries is limited to 15A
+                maximumValue: 15    //Current provided by governor to batteries is limited to 15A
                 indeterminate: (_activeVehicle && _activeVehicle.battery.current_rotor.value !== -1) ? false : true
                 value: (_activeVehicle && _activeVehicle && _activeVehicle.battery.current_rotor.value !== -1) ? _activeVehicle.battery.current_rotor.value : 0
 
@@ -193,12 +225,14 @@ Item {
             ProgressBar {
                 id: progressbarfuel
 
+                //Position parameters
                 Layout.column: 2
                 Layout.row: 6
                 Layout.preferredHeight: 10
                 Layout.preferredWidth: 125
                 
-                maximumValue: 5000
+                //Values and conditions
+                maximumValue: 5000  //Max capacity of the fuel tank is 5000ml
                 indeterminate: (_activeVehicle && _activeVehicle.battery.fuel_level.value !== -1) ? false : true
                 value: (_activeVehicle && _activeVehicle && _activeVehicle.battery.fuel_level.value !== -1) ? _activeVehicle.battery.fuel_level.value : 0
 
@@ -231,12 +265,14 @@ Item {
             ProgressBar {
                 id: progressbarthrottle
 
+                //Position parameters
                 Layout.column: 2
                 Layout.row: 7
                 Layout.preferredHeight: 10
                 Layout.preferredWidth: 125
                 
-                maximumValue: 100
+                //Values and conditions
+                maximumValue: 2000
                 indeterminate: (_activeVehicle && _activeVehicle.battery.throttle_percentage.value !== -1) ? false : true
                 value: (_activeVehicle && _activeVehicle && _activeVehicle.battery.throttle_percentage.value !== -1) ? _activeVehicle.battery.throttle_percentage.value : 0
 

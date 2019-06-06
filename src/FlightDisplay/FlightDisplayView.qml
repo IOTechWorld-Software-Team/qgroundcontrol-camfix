@@ -720,6 +720,7 @@ QGCView {
     //-- QH Instruments
     QHInstruments {
         id: qhinstruments
+        visible: _activeVehicle //Only visible when there is an active vehicle
         anchors.rightMargin:  10
         anchors.bottomMargin: 50
         anchors.bottom: parent.bottom

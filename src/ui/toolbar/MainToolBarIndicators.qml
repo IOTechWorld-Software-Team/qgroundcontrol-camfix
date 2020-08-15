@@ -85,6 +85,53 @@ Item {
         }
     }
 
+    Row {
+        id:                     valuesNov
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left:           indicatorRow.right
+        anchors.leftMargin:     ScreenTools.defaultFontPixelWidth * 2
+        spacing:                ScreenTools.defaultFontPixelWidth * 2
+        visible:                _activeVehicle && !_communicationLost
+
+        ColumnLayout {
+            anchors.top:    parent.top
+
+            QGCLabel {
+                id:                     altitudeLabel
+                Layout.alignment:       Qt.AlignCenter
+                text:                   _activeVehicle ? qsTr("Altitude(" + _activeVehicle.altitudeRelative.units + ")") : qsTr("")
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                font.family:            ScreenTools.demiboldFontFamily
+            }
+
+            QGCLabel {
+                Layout.alignment:       Qt.AlignCenter
+                text:                   _activeVehicle ? qsTr(_activeVehicle.altitudeRelative.value.toFixed(1)) : qsTr("") 
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                font.family:            ScreenTools.demiboldFontFamily
+            }
+        }
+
+        ColumnLayout {
+            anchors.top:    parent.top
+
+            QGCLabel {
+                id:                     flightTimeLabel
+                Layout.alignment:       Qt.AlignCenter
+                text:                   _activeVehicle ? qsTr("Flight Time") : qsTr("")
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                font.family:            ScreenTools.demiboldFontFamily
+            }
+
+            QGCLabel {
+                Layout.alignment:       Qt.AlignCenter
+                text:                   _activeVehicle ? qsTr("NA") : qsTr("") //_activeVehicle.flightTime.enumOrValueString : qsTr("")
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                font.family:            ScreenTools.demiboldFontFamily
+            }
+        }
+    }
+
     /* Nov-Dev: brand image not needed here
     Image {
         anchors.right:          parent.right

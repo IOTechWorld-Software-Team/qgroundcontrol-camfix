@@ -97,7 +97,7 @@ Rectangle {
                 anchors.top:        parent.top
                 anchors.bottom:     parent.bottom
                 exclusiveGroup:     mainActionGroup
-                source:             "/res/QGCLogoWhite"
+                source:             "/res/MultinnovLogo"
                 logo:               true
                 onClicked:          toolBar.showSettingsView()
                 visible:            !QGroundControl.corePlugin.options.combineSettingsAndSetup

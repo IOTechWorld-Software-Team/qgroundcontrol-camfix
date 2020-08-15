@@ -85,6 +85,7 @@ Item {
         }
     }
 
+    /* Nov-Dev: brand image not needed here
     Image {
         anchors.right:          parent.right
         anchors.top:            parent.top
@@ -117,6 +118,7 @@ Item {
                                                         )
                                                     )
     }
+    */
 
     Row {
         anchors.fill:       parent

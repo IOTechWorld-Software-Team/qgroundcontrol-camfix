@@ -153,6 +153,7 @@
         <file alias="QGroundControl/FactControls/qmldir">src/FactSystem/FactControls/qmldir</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayView.qml">src/FlightDisplay/FlightDisplayView.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewMap.qml">src/FlightDisplay/FlightDisplayViewMap.qml</file>
+        <file alias="QGroundControl/FlightDisplay/FlightDisplayViewMultinnovWidgets.qml">src/FlightDisplay/FlightDisplayViewMultinnovWidgets.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewToolbar.qml">src/FlightDisplay/FlightDisplayViewToolbar.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewVideo.qml">src/FlightDisplay/FlightDisplayViewVideo.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewWidgets.qml">src/FlightDisplay/FlightDisplayViewWidgets.qml</file>

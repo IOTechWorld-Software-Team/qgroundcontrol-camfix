@@ -2,6 +2,7 @@ Module QGroundControl.FlightDisplay
 
 FlightDisplayView                   1.0 FlightDisplayView.qml
 FlightDisplayViewMap                1.0 FlightDisplayViewMap.qml
+FlightDisplayViewMultinnovWidgets   1.0 FlightDisplayViewMultinnovWidgets.qml
 FlightDisplayViewToolbar            1.0 FlightDisplayViewToolbar.qml
 FlightDisplayViewVideo              1.0 FlightDisplayViewVideo.qml
 FlightDisplayViewWidgets            1.0 FlightDisplayViewWidgets.qml

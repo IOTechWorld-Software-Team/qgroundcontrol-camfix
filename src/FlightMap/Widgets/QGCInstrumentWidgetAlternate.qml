@@ -36,7 +36,7 @@ Rectangle {
     property real   _labelFontSize:     ScreenTools.defaultFontPointSize * 0.75 * _sizeRatio
     property real   _spacing:           ScreenTools.defaultFontPixelHeight * 0.33
     property real   _topBottomMargin:   (width * 0.05) / 2
-    property real   _availableValueHeight: maxHeight - (root.height + _valuesItem.anchors.topMargin)
+    //property real   _availableValueHeight: maxHeight - (root.height + _valuesItem.anchors.topMargin)
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
 
     // Prevent all clicks from going through to lower layers
@@ -64,6 +64,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
     }
 
+    /* Nov-Dev: we eliminate the info widget for the moment
     Item {
         id:                 _valuesItem
         anchors.topMargin:  ScreenTools.defaultFontPixelHeight / 4
@@ -91,4 +92,5 @@ Rectangle {
             maxHeight:          _availableValueHeight
         }
     }
+    */
 }

@@ -359,6 +359,12 @@ QGCView {
             }
         }
 
+        FlightDisplayViewMultinnovWidgets {
+            visible:                _activeVehicle  && !QGroundControl.videoManager.fullScreen
+            z:                      _panel.z + 2
+
+        }
+
         //-- Video View
         Item {
             id:             _flightVideo
@@ -576,7 +582,7 @@ QGCView {
         }
 
         ToolStrip {
-            visible:            (_activeVehicle ? _activeVehicle.guidedModeSupported : true) && !QGroundControl.videoManager.fullScreen
+            visible:            false//(_activeVehicle ? _activeVehicle.guidedModeSupported : true) && !QGroundControl.videoManager.fullScreen
             id:                 toolStrip
             anchors.leftMargin: isInstrumentRight() ? ScreenTools.defaultFontPixelWidth : undefined
             anchors.left:       isInstrumentRight() ? _panel.left : undefined

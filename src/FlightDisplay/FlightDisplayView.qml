@@ -338,6 +338,27 @@ QGCView {
             }
         }
 
+        //Nov-Dev: custom addons on the flight display
+        Item {
+            id: _customToolbarContainer
+
+            anchors.left:   _panel.left
+            anchors.right:  _panel.right
+            anchors.bottom: _panel.bottom
+
+            height:     _customToolbar.height
+            visible:    _activeVehicle ? true : false
+            z:          _panel.z + 2
+
+            FlightDisplayViewToolbar {
+                id: _customToolbar
+                anchors.left:   parent.left
+                anchors.right:  parent.right
+                anchors.bottom: parent.bottom
+
+            }
+        }
+
         //-- Video View
         Item {
             id:             _flightVideo
@@ -680,9 +701,7 @@ QGCView {
 
         GuidedActionConfirm {
             id:                         guidedActionConfirm
-            anchors.margins:            _margins
-            anchors.bottom:             parent.bottom
-            anchors.horizontalCenter:   parent.horizontalCenter
+            anchors.centerIn:           _panel
             guidedController:           _guidedController
             altitudeSlider:             _altitudeSlider
         }

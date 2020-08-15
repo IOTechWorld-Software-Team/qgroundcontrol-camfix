@@ -75,6 +75,7 @@
         <file alias="QGroundControl/Controls/IndicatorButton.qml">src/QmlControls/IndicatorButton.qml</file>
         <file alias="QGroundControl/Controls/JoystickThumbPad.qml">src/QmlControls/JoystickThumbPad.qml</file>
         <file alias="QGroundControl/Controls/MainToolBar.qml">src/ui/toolbar/MainToolBar.qml</file>
+        <file alias="QGroundControl/Controls/MainToolBarCameraIndicators.qml">src/ui/toolbar/MainToolBarCameraIndicators.qml</file>
         <file alias="QGroundControl/Controls/MainToolBarIndicators.qml">src/ui/toolbar/MainToolBarIndicators.qml</file>
         <file alias="QGroundControl/Controls/MissionCommandDialog.qml">src/QmlControls/MissionCommandDialog.qml</file>
         <file alias="QGroundControl/Controls/MissionItemEditor.qml">src/PlanView/MissionItemEditor.qml</file>
@@ -94,6 +95,7 @@
         <file alias="QGroundControl/Controls/PreFlightCheckList.qml">src/QmlControls/PreFlightCheckList.qml</file>
         <file alias="QGroundControl/Controls/PreFlightCheckModel.qml">src/QmlControls/PreFlightCheckModel.qml</file>
         <file alias="QGroundControl/Controls/QGCButton.qml">src/QmlControls/QGCButton.qml</file>
+        <file alias="QGroundControl/Controls/QGCButtonNov.qml">src/QmlControls/QGCButtonNov.qml</file>
         <file alias="QGroundControl/Controls/QGCCheckBox.qml">src/QmlControls/QGCCheckBox.qml</file>
         <file alias="QGroundControl/Controls/QGCColoredImage.qml">src/QmlControls/QGCColoredImage.qml</file>
         <file alias="QGroundControl/Controls/QGCComboBox.qml">src/QmlControls/QGCComboBox.qml</file>
@@ -151,6 +153,7 @@
         <file alias="QGroundControl/FactControls/qmldir">src/FactSystem/FactControls/qmldir</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayView.qml">src/FlightDisplay/FlightDisplayView.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewMap.qml">src/FlightDisplay/FlightDisplayViewMap.qml</file>
+        <file alias="QGroundControl/FlightDisplay/FlightDisplayViewToolbar.qml">src/FlightDisplay/FlightDisplayViewToolbar.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewVideo.qml">src/FlightDisplay/FlightDisplayViewVideo.qml</file>
         <file alias="QGroundControl/FlightDisplay/FlightDisplayViewWidgets.qml">src/FlightDisplay/FlightDisplayViewWidgets.qml</file>
         <file alias="QGroundControl/FlightDisplay/GuidedActionConfirm.qml">src/FlightDisplay/GuidedActionConfirm.qml</file>

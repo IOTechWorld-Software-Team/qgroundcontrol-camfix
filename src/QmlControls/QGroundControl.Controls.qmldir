@@ -41,6 +41,7 @@ PreFlightCheckGroup         1.0 PreFlightCheckGroup.qml
 PreFlightCheckList          1.0 PreFlightCheckList.qml
 PreFlightCheckModel         1.0 PreFlightCheckModel.qml
 QGCButton                   1.0 QGCButton.qml
+QGCButtonNov                1.0 QGCButtonNov.qml
 QGCCheckBox                 1.0 QGCCheckBox.qml
 QGCColoredImage             1.0 QGCColoredImage.qml
 QGCComboBox                 1.0 QGCComboBox.qml

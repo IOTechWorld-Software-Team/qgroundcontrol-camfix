@@ -475,7 +475,7 @@ FlightMap {
         anchors.right:          parent.right
         anchors.margins:        ScreenTools.defaultFontPixelHeight * (0.33)
         anchors.topMargin:      ScreenTools.defaultFontPixelHeight * (0.33) + state === "bottomMode" ? 0 : ScreenTools.toolbarHeight
-        anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight * (0.33)
+        anchors.bottomMargin:   _customToolbarContainer.height * 1.2
         mapControl:             flightMap
         visible:                !ScreenTools.isTinyScreen
         state:                  "bottomMode"

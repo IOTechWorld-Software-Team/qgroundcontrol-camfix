@@ -132,6 +132,13 @@ Item {
         }
     }
 
+    MainToolBarCameraIndicators {
+        anchors.right:      parent.right
+        anchors.top:        parent.top
+        anchors.bottom:     parent.bottom
+        visible:            _activeVehicle && !_communicationLost
+    }
+
     /* Nov-Dev: brand image not needed here
     Image {
         anchors.right:          parent.right

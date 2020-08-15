@@ -54,6 +54,8 @@
         <file alias="arrow-down.png">src/QmlControls/arrow-down.png</file>
 		<file alias="camera.svg">resources/camera.svg</file>
         <file alias="camera_photo.svg">src/Camera/images/camera_photo.svg</file>
+        <file alias="camera_photo2.svg">src/Camera/images/camera_photo2.svg</file>
+        <file alias="camera_timelaps.svg">src/Camera/images/camera_timelaps.svg</file>
         <file alias="camera_video.svg">src/Camera/images/camera_video.svg</file>
         <file alias="checkbox-check.svg">src/QmlControls/checkbox-check.svg</file>
         <file alias="FirmwareUpgradeIcon.png">src/VehicleSetup/FirmwareUpgradeIcon.png</file>
@@ -202,6 +204,7 @@
         <file alias="JoystickBezel.png">resources/JoystickBezel.png</file>
         <file alias="JoystickBezelLight.png">resources/JoystickBezelLight.png</file>
         <file alias="land.svg">resources/land.svg</file>
+        <file alias="MultinnovLogo">resources/MultinnovLogo.svg</file>
         <file alias="notile.png">resources/notile.png</file>
         <file alias="Pause.svg">resources/Pause.svg</file>
         <file alias="pause-mission.svg">resources/pause-mission.svg</file>

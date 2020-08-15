@@ -29,15 +29,16 @@ Item {
 
     function getBatteryColor() {
         if(_activeVehicle) {
-            if(_activeVehicle.battery.percentRemaining.value > 75) {
-                return qgcPal.text
-            }
             if(_activeVehicle.battery.percentRemaining.value > 50) {
+                return qgcPal.colorGreen
+            }
+            if(_activeVehicle.battery.percentRemaining.value > 20) {
+                return qgcPal.colorYellow
+            }
+            if(_activeVehicle.battery.percentRemaining.value > 5) {
                 return qgcPal.colorOrange
             }
-            if(_activeVehicle.battery.percentRemaining.value > 0.1) {
-                return qgcPal.colorRed
-            }
+            return qgcPal.colorRed
         }
         return qgcPal.colorGrey
     }
@@ -115,7 +116,7 @@ Item {
             sourceSize.width:   width
             source:             "/qmlimages/Battery.svg"
             fillMode:           Image.PreserveAspectFit
-            color:              qgcPal.text
+            color:              getBatteryColor()
         }
         QGCLabel {
             text:                   getBatteryPercentageText()

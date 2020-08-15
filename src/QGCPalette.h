@@ -97,6 +97,7 @@ public:
     DEFINE_QGC_COLOR(colorGreen,            setColorGreen)
     DEFINE_QGC_COLOR(colorOrange,           setColorOrange)
     DEFINE_QGC_COLOR(colorRed,              setColorRed)
+    DEFINE_QGC_COLOR(colorYellow,           setColorYellow)
     DEFINE_QGC_COLOR(colorGrey,             setColorGrey)
     DEFINE_QGC_COLOR(colorBlue,             setColorBlue)
     DEFINE_QGC_COLOR(alertBackground,       setAlertBackground)

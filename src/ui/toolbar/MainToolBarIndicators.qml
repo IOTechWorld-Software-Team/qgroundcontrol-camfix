@@ -14,6 +14,9 @@ import QtQuick.Dialogs  1.2
 
 import QGroundControl                       1.0
 import QGroundControl.Controls              1.0
+import QGroundControl.Controllers           1.0
+import QGroundControl.FactSystem            1.0
+import QGroundControl.FactControls          1.0
 import QGroundControl.MultiVehicleManager   1.0
 import QGroundControl.ScreenTools           1.0
 import QGroundControl.Palette               1.0
@@ -85,7 +88,7 @@ Item {
         }
     }
 
-    Row {
+     Row {
         id:                     valuesNov
         anchors.verticalCenter: parent.verticalCenter
         anchors.left:           indicatorRow.right
@@ -93,44 +96,42 @@ Item {
         spacing:                ScreenTools.defaultFontPixelWidth * 2
         visible:                _activeVehicle && !_communicationLost
 
-        ColumnLayout {
-            anchors.top:    parent.top
+        ValuesWidgetController {
+            id: controller
+        }
 
-            QGCLabel {
-                id:                     altitudeLabel
-                Layout.alignment:       Qt.AlignCenter
-                text:                   _activeVehicle ? qsTr("Altitude(" + _activeVehicle.altitudeRelative.units + ")") : qsTr("")
-                font.pointSize:         ScreenTools.mediumFontPointSize
-                font.family:            ScreenTools.demiboldFontFamily
-            }
-
-            QGCLabel {
-                Layout.alignment:       Qt.AlignCenter
-                text:                   _activeVehicle ? qsTr(_activeVehicle.altitudeRelative.value.toFixed(1)) : qsTr("") 
-                font.pointSize:         ScreenTools.mediumFontPointSize
-                font.family:            ScreenTools.demiboldFontFamily
+        Repeater {
+            model: _activeVehicle ? controller.largeValues : 0
+            Loader {
+                sourceComponent: fact ? largeValue : undefined
+                property Fact fact: _activeVehicle.getFact(modelData.replace("Vehicle.", ""))
             }
         }
 
-        ColumnLayout {
-            anchors.top:    parent.top
+        Component {
+            id: largeValue
 
-            QGCLabel {
-                id:                     flightTimeLabel
-                Layout.alignment:       Qt.AlignCenter
-                text:                   _activeVehicle ? qsTr("Flight Time") : qsTr("")
-                font.pointSize:         ScreenTools.mediumFontPointSize
-                font.family:            ScreenTools.demiboldFontFamily
-            }
+        
 
-            QGCLabel {
-                Layout.alignment:       Qt.AlignCenter
-                text:                   _activeVehicle ? qsTr("NA") : qsTr("") //_activeVehicle.flightTime.enumOrValueString : qsTr("")
-                font.pointSize:         ScreenTools.mediumFontPointSize
-                font.family:            ScreenTools.demiboldFontFamily
-            }
+                ColumnLayout {
+                    anchors.top:    parent.top
+                    QGCLabel {
+                        width:                  parent.width
+                        Layout.alignment:       Qt.AlignCenter
+                        wrapMode:               Text.WordWrap
+                        text:                   fact.shortDescription + (fact.units ? " (" + fact.units + ")" : "")
+                    }
+                    QGCLabel {
+                        width:                  parent.width
+                        Layout.alignment:       Qt.AlignCenter
+                        font.pointSize:         ScreenTools.mediumFontPointSize * 1.3 
+                        font.family:            ScreenTools.demiboldFontFamily
+                        fontSizeMode:           Text.HorizontalFit
+                        text:                   fact.enumOrValueString
+                    }
+                }
         }
-    }
+     }
 
     MainToolBarCameraIndicators {
         anchors.right:      parent.right
@@ -138,41 +139,6 @@ Item {
         anchors.bottom:     parent.bottom
         visible:            _activeVehicle && !_communicationLost
     }
-
-    /* Nov-Dev: brand image not needed here
-    Image {
-        anchors.right:          parent.right
-        anchors.top:            parent.top
-        anchors.bottom:         parent.bottom
-        visible:                x > indicatorRow.width && !_communicationLost
-        fillMode:               Image.PreserveAspectFit
-        source:                 _outdoorPalette ? _brandImageOutdoor : _brandImageIndoor
-        mipmap:                 true
-
-        property bool   _outdoorPalette:        qgcPal.globalTheme === QGCPalette.Light
-        property bool   _corePluginBranding:    QGroundControl.corePlugin.brandImageIndoor.length != 0
-        property string _userBrandImageIndoor:  QGroundControl.settingsManager.brandImageSettings.userBrandImageIndoor.value
-        property string _userBrandImageOutdoor: QGroundControl.settingsManager.brandImageSettings.userBrandImageOutdoor.value
-        property bool   _userBrandingIndoor:    _userBrandImageIndoor.length != 0
-        property bool   _userBrandingOutdoor:   _userBrandImageOutdoor.length != 0
-        property string _brandImageIndoor:      _userBrandingIndoor ?
-                                                    _userBrandImageIndoor : (_userBrandingOutdoor ?
-                                                        _userBrandImageOutdoor : (_corePluginBranding ?
-                                                            QGroundControl.corePlugin.brandImageIndoor : (_activeVehicle ?
-                                                                _activeVehicle.brandImageIndoor : ""
-                                                            )
-                                                        )
-                                                    )
-        property string _brandImageOutdoor:     _userBrandingOutdoor ?
-                                                    _userBrandImageOutdoor : (_userBrandingIndoor ?
-                                                        _userBrandImageIndoor : (_corePluginBranding ?
-                                                            QGroundControl.corePlugin.brandImageOutdoor : (_activeVehicle ?
-                                                                _activeVehicle.brandImageOutdoor : ""
-                                                            )
-                                                        )
-                                                    )
-    }
-    */
 
     Row {
         anchors.fill:       parent

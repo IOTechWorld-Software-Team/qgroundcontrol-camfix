@@ -211,6 +211,8 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _clockFactGroup(this)
     , _distanceSensorFactGroup(this)
     , _estimatorStatusFactGroup(this)
+    , _wallMode(false)
+    , _roofMode(false)
 {
     connect(_joystickManager, &JoystickManager::activeJoystickChanged, this, &Vehicle::_loadSettings);
     connect(qgcApp()->toolbox()->multiVehicleManager(), &MultiVehicleManager::activeVehicleAvailableChanged, this, &Vehicle::_loadSettings);
@@ -225,6 +227,8 @@ Vehicle::Vehicle(LinkInterface*             link,
     connect(this, &Vehicle::_sendMessageOnLinkOnThread, this, &Vehicle::_sendMessageOnLink, Qt::QueuedConnection);
     connect(this, &Vehicle::flightModeChanged,          this, &Vehicle::_handleFlightModeChanged);
     connect(this, &Vehicle::armedChanged,               this, &Vehicle::_announceArmedChanged);
+    connect(this, &Vehicle::multinnovWallModeChanged,   this, &Vehicle::_announceWallModeChanged);
+    connect(this, &Vehicle::multinnovRoofModeChanged,   this, &Vehicle::_announceRoofModeChanged);
 
     connect(_toolbox->multiVehicleManager(), &MultiVehicleManager::parameterReadyVehicleAvailableChanged, this, &Vehicle::_vehicleParamLoaded);
 
@@ -410,6 +414,8 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _vibrationFactGroup(this)
     , _clockFactGroup(this)
     , _distanceSensorFactGroup(this)
+    , _wallMode(false)
+    , _roofMode(false)
 {
     _commonInit();
 
@@ -3117,6 +3123,39 @@ void Vehicle::setCurrentMissionSequence(int seq)
                                               _compID,
                                               seq);
     sendMessageOnLink(priorityLink(), msg);
+}
+
+void Vehicle::setWallMode(bool multinnovWallMode)
+{
+    
+    sendMavCommand(_defaultComponentId,
+    MAV_CMD_USER_1,
+    true,
+    !multinnovWallMode ? 1.0f : 0.0f);
+    
+    _wallMode = multinnovWallMode;
+    emit multinnovWallModeChanged (_wallMode);
+}
+
+void Vehicle::_announceWallModeChanged(bool multinnovWallMode)
+{
+    _say(QString("%1 %2").arg(_vehicleIdSpeech()).arg(multinnovWallMode ? QString(tr("wall active")) : QString(tr("wall disactive"))));
+}
+
+void Vehicle::setRoofMode(bool multinnovRoofMode)
+{
+    sendMavCommand(_defaultComponentId,
+    MAV_CMD_USER_2,
+    true,
+    !multinnovRoofMode ? 1.0f : 0.0f);
+
+    _roofMode = multinnovRoofMode;
+    emit multinnovRoofModeChanged (_roofMode);
+}
+
+void Vehicle::_announceRoofModeChanged(bool multinnovRoofMode)
+{
+    _say(QString("%1 %2").arg(_vehicleIdSpeech()).arg(multinnovRoofMode ? QString(tr("roof active")) : QString(tr("roof disactive"))));
 }
 
 void Vehicle::sendMavCommand(int component, MAV_CMD command, bool showError, float param1, float param2, float param3, float param4, float param5, float param6, float param7)

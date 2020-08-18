@@ -546,6 +546,8 @@ public:
     Q_PROPERTY(QStringList          flightModes             READ flightModes                                            NOTIFY flightModesChanged)
     Q_PROPERTY(QString              flightMode              READ flightMode             WRITE setFlightMode             NOTIFY flightModeChanged)
     Q_PROPERTY(bool                 hilMode                 READ hilMode                WRITE setHilMode                NOTIFY hilModeChanged)
+    Q_PROPERTY(bool                 multinnovWallMode       READ multinnovWallMode      WRITE setWallMode               NOTIFY multinnovWallModeChanged)
+    Q_PROPERTY(bool                 multinnovRoofMode       READ multinnovRoofMode      WRITE setRoofMode               NOTIFY multinnovRoofModeChanged)
     Q_PROPERTY(QmlObjectListModel*  trajectoryPoints        READ trajectoryPoints                                       CONSTANT)
     Q_PROPERTY(QmlObjectListModel*  cameraTriggerPoints     READ cameraTriggerPoints                                    CONSTANT)
     Q_PROPERTY(float                latitude                READ latitude                                               NOTIFY coordinateChanged)
@@ -851,6 +853,15 @@ public:
 
     void setGuidedMode(bool guidedMode);
 
+    /// DEV-NOV especific comands to change to custom modes
+    /// Function to change to Wall mode
+    bool multinnovWallMode(void) {return _wallMode;}
+    void setWallMode(bool multinnovWallMode);
+
+    /// Function to change to Roof mode
+    bool multinnovRoofMode(void) {return _roofMode;}
+    void setRoofMode(bool multinnovRoofMode);
+
     QString prearmError(void) const { return _prearmError; }
     void setPrearmError(const QString& prearmError);
 
@@ -1112,6 +1123,8 @@ signals:
     void linksChanged(void);
     void linksPropertiesChanged(void);
     void textMessageReceived(int uasid, int componentid, int severity, QString text);
+    void multinnovWallModeChanged(bool multinnovWallMode);
+    void multinnovRoofModeChanged(bool multinnovRoofMode);
 
     void messagesReceivedChanged    ();
     void messagesSentChanged        ();
@@ -1191,6 +1204,8 @@ private slots:
     void _remoteControlRSSIChanged(uint8_t rssi);
     void _handleFlightModeChanged(const QString& flightMode);
     void _announceArmedChanged(bool armed);
+    void _announceWallModeChanged(bool multinnovWallMode);
+    void _announceRoofModeChanged(bool multinnovRoofMode);
     void _offlineFirmwareTypeSettingChanged(QVariant value);
     void _offlineVehicleTypeSettingChanged(QVariant value);
     void _offlineCruiseSpeedSettingChanged(QVariant value);
@@ -1345,6 +1360,8 @@ private:
     uint64_t        _capabilityBits;
     bool            _highLatencyLink;
     bool            _receivingAttitudeQuaternion;
+    bool            _wallMode;
+    bool            _roofMode;
 
     QGCCameraManager* _cameras;
 

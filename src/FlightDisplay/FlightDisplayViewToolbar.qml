@@ -20,10 +20,7 @@ Item {
     signal armVehicle
     signal disarmVehicle
 
-    ButtonGroup {
-        id: modeGroupButton
-    }
-
+   
     Rectangle {
 
         id: _fillerRectangle
@@ -49,7 +46,6 @@ Item {
 
         QGCButtonNov {
             id:                     altHoldButton
-            ButtonGroup.group:      modeGroupButton
             text:                   qsTr("Altitude Hold")
 
             onClicked:  {
@@ -62,7 +58,6 @@ Item {
 
         QGCButtonNov {
             id:                     loiterButton
-            ButtonGroup.group:      modeGroupButton
             text:                   qsTr("Loiter")
             
             onClicked:  {
@@ -75,16 +70,32 @@ Item {
 
         QGCButtonNov {
             id:                     wallButton
-            ButtonGroup.group:      modeGroupButton
             text:                   qsTr("Wall")
-            //onClicked:              _activeVehicle.
+            onClicked:  {
+                if (_activeVehicle) {
+                    if (_activeVehicle.multinnovWallMode == false) {
+                        _activeVehicle.multinnovWallMode = true
+                    } else {
+                        _activeVehicle.multinnovWallMode = false
+                    }
+                }
+            }
+            checked:    _activeVehicle && _activeVehicle.multinnovWallMode == true ? true : false
         }
 
         QGCButtonNov {
             id:                     roofButton
-            ButtonGroup.group:      modeGroupButton
             text:                   qsTr("Roof")
-            //onClicked:              _activeVehicle.
+            onClicked:  {
+                if (_activeVehicle) {
+                    if (_activeVehicle.multinnovRoofMode == false) {
+                        _activeVehicle.multinnovRoofMode = true
+                    } else {
+                        _activeVehicle.multinnovRoofMode = false
+                    }
+                }
+            }
+            checked:    _activeVehicle && _activeVehicle.multinnovRoofMode == true ? true : false
         }
 
         QGCButtonNov {

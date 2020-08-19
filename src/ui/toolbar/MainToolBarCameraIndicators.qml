@@ -14,8 +14,12 @@ import QGroundControl.Palette           1.0
 import QGroundControl.ScreenTools       1.0
 import QGroundControl.Vehicle           1.0
 
-Item{
+Item {
     id: rootItem
+
+    property bool _cameraVideoMode: false
+    property bool _cameraPhotoMode: false
+    property bool _cameraTimeLapsMode: false
 
     Row {
         id:                 rowContainer
@@ -30,13 +34,19 @@ Item{
             sourceSize.width:   width
             fillMode:           Image.PreserveAspectFit
             source:             "/qmlimages/camera_timelaps.svg"
-            color:              qgcPal.text//_cameraTimeLapsMode ? qgcPal.colorRed : qgcPal.text
-            /*MouseArea {
+            color:              _cameraTimeLapsMode ? qgcPal.colorRed : qgcPal.text
+            MouseArea {
                 anchors.fill:   parent
-                enabled:        _cameraPhotoMode
                 onClicked: {
+                    if (_cameraTimeLapsMode) {
+                        _cameraTimeLapsMode = false
+                    } else {
+                        _cameraTimeLapsMode = true
+                        _cameraPhotoMode = false
+                        _cameraVideoMode = false
+                    }
                 }
-            }*/
+            }
         }
 
         QGCColoredImage {
@@ -46,13 +56,20 @@ Item{
             sourceSize.width:   width
             fillMode:           Image.PreserveAspectFit
             source:             "/qmlimages/camera_photo2.svg"
-            color:              qgcPal.text//_cameraPhotoMode ? qgcPal.colorRed : qgcPal.text
-            /*MouseArea {
+            color:              _cameraPhotoMode ? qgcPal.colorRed : qgcPal.text
+            MouseArea {
                 anchors.fill:   parent
-                enabled:        _cameraPhotoMode
                 onClicked: {
+                    if (_cameraPhotoMode) {
+                        _cameraPhotoMode = false
+                    } else {
+                        _cameraPhotoMode = true
+                        _cameraVideoMode = false
+                        _cameraTimeLapsMode = false
+                        
+                    }
                 }
-            }*/
+            }
         }
 
         QGCColoredImage {
@@ -62,13 +79,20 @@ Item{
             sourceSize.width:   width
             fillMode:           Image.PreserveAspectFit
             source:             "/qmlimages/camera_video.svg"
-            color:              qgcPal.text//_cameraVideoMode ? qgcPal.colorRed : qgcPal.text
-            /*MouseArea {
+            color:              _cameraVideoMode ? qgcPal.colorRed : qgcPal.text
+            MouseArea {
                 anchors.fill:   parent
-                enabled:        _cameraPhotoMode
                 onClicked: {
+                    if (_cameraVideoMode) {
+                        _cameraVideoMode = false
+                    } else {
+                        _cameraVideoMode = true
+                        _cameraPhotoMode = false
+                        _cameraTimeLapsMode = false
+                    }
                 }
-            }*/
+            }
+            
         }
     }        
 }

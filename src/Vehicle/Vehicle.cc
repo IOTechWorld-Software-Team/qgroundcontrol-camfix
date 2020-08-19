@@ -213,6 +213,7 @@ Vehicle::Vehicle(LinkInterface*             link,
     , _estimatorStatusFactGroup(this)
     , _wallMode(false)
     , _roofMode(false)
+    , _multinnovLedPower(1000)
 {
     connect(_joystickManager, &JoystickManager::activeJoystickChanged, this, &Vehicle::_loadSettings);
     connect(qgcApp()->toolbox()->multiVehicleManager(), &MultiVehicleManager::activeVehicleAvailableChanged, this, &Vehicle::_loadSettings);
@@ -416,6 +417,7 @@ Vehicle::Vehicle(MAV_AUTOPILOT              firmwareType,
     , _distanceSensorFactGroup(this)
     , _wallMode(false)
     , _roofMode(false)
+    , _multinnovLedPower(1000)
 {
     _commonInit();
 
@@ -3162,6 +3164,12 @@ void Vehicle:: setMultinnovCameraMode(const QString& multinnovCameraMode)
 {
     _multinnovCameraMode = multinnovCameraMode;
     qgcApp()->showMessage(tr("Mode changed to: %1").arg(multinnovCameraMode));
+}
+
+void Vehicle::setmultinnovLedPower(uint32_t multinnovLedPower)
+{
+    _multinnovLedPower = multinnovLedPower;
+    qgcApp()->showMessage(tr("LED power changed to: %1").arg(multinnovLedPower));
 }
 
 /*

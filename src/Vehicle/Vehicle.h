@@ -549,6 +549,7 @@ public:
     Q_PROPERTY(bool                 multinnovWallMode       READ multinnovWallMode      WRITE setWallMode               NOTIFY multinnovWallModeChanged)
     Q_PROPERTY(bool                 multinnovRoofMode       READ multinnovRoofMode      WRITE setRoofMode               NOTIFY multinnovRoofModeChanged)
     Q_PROPERTY(QString              multinnovCameraMode     READ multinnovCameraMode    WRITE setMultinnovCameraMode    NOTIFY multinnovCameraModeChanged)
+    Q_PROPERTY(unsigned int         multinnovLedPower       READ multinnovLedPower      WRITE setmultinnovLedPower      NOTIFY multinnovLedPowerChanged)
     Q_PROPERTY(QmlObjectListModel*  trajectoryPoints        READ trajectoryPoints                                       CONSTANT)
     Q_PROPERTY(QmlObjectListModel*  cameraTriggerPoints     READ cameraTriggerPoints                                    CONSTANT)
     Q_PROPERTY(float                latitude                READ latitude                                               NOTIFY coordinateChanged)
@@ -867,6 +868,9 @@ public:
     QString multinnovCameraMode(void) const {return _multinnovCameraMode;}
     void setMultinnovCameraMode(const QString& multinnovCameraMode);
 
+    int multinnovLedPower(void) {return _multinnovLedPower;}
+    void setmultinnovLedPower(uint32_t multinnovLedPower);
+
     QString prearmError(void) const { return _prearmError; }
     void setPrearmError(const QString& prearmError);
 
@@ -1131,6 +1135,7 @@ signals:
     void multinnovWallModeChanged(bool multinnovWallMode);
     void multinnovRoofModeChanged(bool multinnovRoofMode);
     void multinnovCameraModeChanged(const QString& multinnovCameraMode);
+    void multinnovLedPowerChanged(int multinnovLedPower);
 
     void messagesReceivedChanged    ();
     void messagesSentChanged        ();
@@ -1369,6 +1374,7 @@ private:
     bool            _wallMode;
     bool            _roofMode;
     QString         _multinnovCameraMode;
+    uint32_t        _multinnovLedPower;
 
     QGCCameraManager* _cameras;
 

@@ -3158,6 +3158,44 @@ void Vehicle::_announceRoofModeChanged(bool multinnovRoofMode)
     _say(QString("%1 %2").arg(_vehicleIdSpeech()).arg(multinnovRoofMode ? QString(tr("roof active")) : QString(tr("roof disactive"))));
 }
 
+void Vehicle:: setMultinnovCameraMode(const QString& multinnovCameraMode)
+{
+    _multinnovCameraMode = multinnovCameraMode;
+    qgcApp()->showMessage(tr("Mode changed to: %1").arg(multinnovCameraMode));
+}
+
+/*
+QString Vehicle::flightMode(void) const
+{
+    return _firmwarePlugin->flightMode(_base_mode, _custom_mode);
+}
+
+void Vehicle::setFlightMode(const QString& flightMode)
+{
+    uint8_t     base_mode;
+    uint32_t    custom_mode;
+
+    if (_firmwarePlugin->setFlightMode(flightMode, &base_mode, &custom_mode)) {
+        // setFlightMode will only set MAV_MODE_FLAG_CUSTOM_MODE_ENABLED in base_mode, we need to move back in the existing
+        // states.
+        uint8_t newBaseMode = _base_mode & ~MAV_MODE_FLAG_DECODE_POSITION_CUSTOM_MODE;
+        newBaseMode |= base_mode;
+
+        mavlink_message_t msg;
+        mavlink_msg_set_mode_pack_chan(_mavlink->getSystemId(),
+                                       _mavlink->getComponentId(),
+                                       priorityLink()->mavlinkChannel(),
+                                       &msg,
+                                       id(),
+                                       newBaseMode,
+                                       custom_mode);
+        sendMessageOnLink(priorityLink(), msg);
+    } else {
+        qWarning() << "FirmwarePlugin::setFlightMode failed, flightMode:" << flightMode;
+    }
+}
+*/
+
 void Vehicle::sendMavCommand(int component, MAV_CMD command, bool showError, float param1, float param2, float param3, float param4, float param5, float param6, float param7)
 {
     MavCommandQueueEntry_t entry;

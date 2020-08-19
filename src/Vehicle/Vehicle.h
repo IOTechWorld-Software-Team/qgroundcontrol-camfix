@@ -548,6 +548,7 @@ public:
     Q_PROPERTY(bool                 hilMode                 READ hilMode                WRITE setHilMode                NOTIFY hilModeChanged)
     Q_PROPERTY(bool                 multinnovWallMode       READ multinnovWallMode      WRITE setWallMode               NOTIFY multinnovWallModeChanged)
     Q_PROPERTY(bool                 multinnovRoofMode       READ multinnovRoofMode      WRITE setRoofMode               NOTIFY multinnovRoofModeChanged)
+    Q_PROPERTY(QString              multinnovCameraMode     READ multinnovCameraMode    WRITE setMultinnovCameraMode    NOTIFY multinnovCameraModeChanged)
     Q_PROPERTY(QmlObjectListModel*  trajectoryPoints        READ trajectoryPoints                                       CONSTANT)
     Q_PROPERTY(QmlObjectListModel*  cameraTriggerPoints     READ cameraTriggerPoints                                    CONSTANT)
     Q_PROPERTY(float                latitude                READ latitude                                               NOTIFY coordinateChanged)
@@ -862,6 +863,10 @@ public:
     bool multinnovRoofMode(void) {return _roofMode;}
     void setRoofMode(bool multinnovRoofMode);
 
+    /// Funtion to change camera mode
+    QString multinnovCameraMode(void) const {return _multinnovCameraMode;}
+    void setMultinnovCameraMode(const QString& multinnovCameraMode);
+
     QString prearmError(void) const { return _prearmError; }
     void setPrearmError(const QString& prearmError);
 
@@ -1125,6 +1130,7 @@ signals:
     void textMessageReceived(int uasid, int componentid, int severity, QString text);
     void multinnovWallModeChanged(bool multinnovWallMode);
     void multinnovRoofModeChanged(bool multinnovRoofMode);
+    void multinnovCameraModeChanged(const QString& multinnovCameraMode);
 
     void messagesReceivedChanged    ();
     void messagesSentChanged        ();
@@ -1362,6 +1368,7 @@ private:
     bool            _receivingAttitudeQuaternion;
     bool            _wallMode;
     bool            _roofMode;
+    QString         _multinnovCameraMode;
 
     QGCCameraManager* _cameras;
 

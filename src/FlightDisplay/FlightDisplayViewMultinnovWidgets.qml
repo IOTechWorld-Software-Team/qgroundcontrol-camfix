@@ -1,4 +1,4 @@
-import QtQuick                  2.3
+import QtQuick                  2.2
 import QtQuick.Controls         1.2
 import QtQuick.Extras           1.4
 import QtQuick.Controls.Styles  1.4
@@ -7,6 +7,7 @@ import QGroundControl               1.0
 import QGroundControl.Controls      1.0
 import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
+import QGroundControl.MultiVehicleManager   1.0
 
 
 Item {
@@ -14,6 +15,8 @@ Item {
     anchors.fill:   parent
 
     property real   _margins:               ScreenTools.defaultFontPixelWidth / 2
+
+    property var  _activeVehicle:       QGroundControl.multiVehicleManager.activeVehicle
 
     Rectangle {
         anchors.margins:        _margins
@@ -58,7 +61,7 @@ Item {
             anchors.horizontalCenter:   parent.horizontalCenter
 
             orientation:    Qt.Vertical
-            minimumValue:   0
+            minimumValue:   1000
             maximumValue:   2000
             rotation:       180
 
@@ -70,25 +73,31 @@ Item {
             }
         }
 
-            /* Nov-Dev: todo include the PWM functionality
+        QGCButton {
+            id:             ledPowerSetButton
+            text:           qsTr("SET")
+            backRadius:     ledSlider.height / 2
+            width:          ledSlider * 0.8
+            onClicked:      _activeVehicle.multinnovLedPower = ledSlider.value
 
-            We will use the value of ledSlider.value as a direct paramenter to pass over the RCoverride
-
-        */
+            anchors.horizontalCenter:   parent.horizontalCenter
+            anchors.bottom:             parent.bottom
+            anchors.bottomMargin:       ScreenTools.defaultFontPixelHeight /2
+        }
 
         QGCLabel {
             id: minusLabel
 
             anchors.left:       parent.left
             anchors.right:      parent.right
-            anchors.bottom:     parent.bottom
+            anchors.bottom:     ledPowerSetButton.top
             anchors.margins:    _margins
 
             wrapMode:               Text.WordWrap
             horizontalAlignment:    Text.AlignHCenter
             font.pointSize:         ScreenTools.mediumFontPointSize
             text:                   qsTr("-") 
-        }        
+        }
     }
 
     QGCLabel {

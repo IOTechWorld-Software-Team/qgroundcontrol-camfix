@@ -105,7 +105,11 @@ Fact* FactPanelController::getParameterFact(int componentId, const QString& name
         return fact;
     } else {
         if (reportMissing) {
-            _reportMissingParameter(componentId, name);
+            if ( name.compare("1:COMPASS_PRIMARY") ) {
+                return nullptr;
+            } else {
+                _reportMissingParameter(componentId, name);
+            }
         }
         return nullptr;
     }

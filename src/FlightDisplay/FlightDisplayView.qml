@@ -638,6 +638,7 @@ Item {
                     name:               qsTr("Action"),
                     iconSource:         "/res/action.svg",
                     buttonVisible:      _anyActionAvailable,
+                    buttonEnabled:      true,
                     action:             -1
                 }
             ]

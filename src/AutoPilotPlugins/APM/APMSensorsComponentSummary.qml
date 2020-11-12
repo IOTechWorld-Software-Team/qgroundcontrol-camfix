@@ -26,21 +26,21 @@ Item {
     Column {
         anchors.fill:       parent
 
-        Repeater {
-            model: 3
-
-            VehicleSummaryRow {
-                labelText:  qsTr("Compass ") + (index + 1) + ""
-                valueText:  sensorParams.rgCompassAvailable[index] ?
-                                (sensorParams.rgCompassCalibrated[index] ?
-                                     (sensorParams.rgCompassPrimary[index] ? "Primary" : "Secondary") +
-                                     (sensorParams.rgCompassExternalParamAvailable[index] ?
-                                          (sensorParams.rgCompassExternal[index] ? ", External" : ", Internal" ) :
-                                          "") :
-                                     qsTr("Setup required")) :
-                                qsTr("Not installed")
-            }
-        }
+        // Repeater {
+        //     model: 3
+// 
+        //     VehicleSummaryRow {
+        //         labelText:  qsTr("Compass ") + (index + 1) + ""
+        //         valueText:  sensorParams.rgCompassAvailable[index] ?
+        //                         (sensorParams.rgCompassCalibrated[index] ?
+        //                              (sensorParams.rgCompassPrimary[index] ? "Primary" : "Secondary") +
+        //                              (sensorParams.rgCompassExternalParamAvailable[index] ?
+        //                                   (sensorParams.rgCompassExternal[index] ? ", External" : ", Internal" ) :
+        //                                   "") :
+        //                              qsTr("Setup required")) :
+        //                         qsTr("Not installed")
+        //     }
+        // }
 
         VehicleSummaryRow {
             labelText: qsTr("Accelerometer(s)")

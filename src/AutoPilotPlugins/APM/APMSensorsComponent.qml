@@ -230,27 +230,27 @@ SetupPage {
                         }
                     }
 
-                    Column {
-                        anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 2
-                        anchors.left:       parent.left
-                        anchors.right:      parent.right
-                        spacing:            Math.round(ScreenTools.defaultFontPixelHeight / 4)
-
-                        QGCLabel {
-                            text: qsTr("Compass ") + (index+1) + " " +
-                                  (sensorParams.rgCompassPrimary[index] ? qsTr("(primary") : qsTr("(secondary")) +
-                                  (sensorParams.rgCompassExternalParamAvailable[index] ?
-                                       (sensorParams.rgCompassExternal[index] ? qsTr(", external") : qsTr(", internal" )) :
-                                       "") +
-                                  ")"
-                        }
-
-                        FactCheckBox {
-                            text:       qsTr("Use Compass")
-                            fact:       sensorParams.rgCompassUseFact[index]
-                            visible:    sensorParams.rgCompassUseParamAvailable[index] && !sensorParams.rgCompassPrimary[index]
-                        }
-                    }
+                    // Column {
+                    //     anchors.leftMargin: ScreenTools.defaultFontPixelWidth * 2
+                    //     anchors.left:       parent.left
+                    //     anchors.right:      parent.right
+                    //     spacing:            Math.round(ScreenTools.defaultFontPixelHeight / 4)
+// 
+                    //     QGCLabel {
+                    //         text: qsTr("Compass ") + (index+1) + " " +
+                    //               (sensorParams.rgCompassPrimary[index] ? qsTr("(primary") : qsTr("(secondary")) +
+                    //               (sensorParams.rgCompassExternalParamAvailable[index] ?
+                    //                    (sensorParams.rgCompassExternal[index] ? qsTr(", external") : qsTr(", internal" )) :
+                    //                    "") +
+                    //               ")"
+                    //     }
+// 
+                    //     FactCheckBox {
+                    //         text:       qsTr("Use Compass")
+                    //         fact:       sensorParams.rgCompassUseFact[index]
+                    //         visible:    sensorParams.rgCompassUseParamAvailable[index] && !sensorParams.rgCompassPrimary[index]
+                    //     }
+                    // }
                 }
             }
 

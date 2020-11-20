@@ -270,14 +270,14 @@ Vehicle::Vehicle(LinkInterface*             link,
         _geoFenceManagerInitialRequestSent = true;
         _rallyPointManagerInitialRequestSent = true;
     } else {
-        sendMavCommand(MAV_COMP_ID_ALL,
-                       MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES,
-                       false,                                   // No error shown if fails
-                       1);                                      // Request firmware version
-        sendMavCommand(MAV_COMP_ID_ALL,
-                       MAV_CMD_REQUEST_PROTOCOL_VERSION,
-                       false,                                   // No error shown if fails
-                       1);                                      // Request protocol version
+        // sendMavCommand(MAV_COMP_ID_ALL,
+        //                MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES,
+        //                false,                                   // No error shown if fails
+        //                1);                                      // Request firmware version
+        // sendMavCommand(MAV_COMP_ID_ALL,
+        //                MAV_CMD_REQUEST_PROTOCOL_VERSION,
+        //                false,                                   // No error shown if fails
+        //                1);                                      // Request protocol version
     }
 
     _firmwarePlugin->initializeVehicle(this);

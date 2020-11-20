@@ -81,6 +81,7 @@ const char* Vehicle::_headingToHomeFactName =       "headingToHome";
 const char* Vehicle::_distanceToGCSFactName =       "distanceToGCS";
 const char* Vehicle::_hobbsFactName =               "hobbs";
 const char* Vehicle::_throttlePctFactName =         "throttlePct";
+const char* Vehicle::_distanceToNextWPFactName =    "distanceToNextWP";
 
 const char* Vehicle::_gpsFactGroupName =                "gps";
 const char* Vehicle::_battery1FactGroupName =           "battery";
@@ -488,6 +489,7 @@ void Vehicle::_commonInit()
     _addFact(&_headingToHomeFact,       _headingToHomeFactName);
     _addFact(&_distanceToGCSFact,       _distanceToGCSFactName);
     _addFact(&_throttlePctFact,         _throttlePctFactName);
+    _addFact(&_distanceToNextWPFact,    _distanceToNextWPFactName);
 
     _hobbsFact.setRawValue(QVariant(QString("0000:00:00")));
     _addFact(&_hobbsFact,               _hobbsFactName);
@@ -808,6 +810,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_ADSB_VEHICLE:
         _handleADSBVehicle(message);
         break;
+    case MAVLINK_MSG_ID_HIGH_LATENCY:
+        _handleHighLatency(message);
+        break;
     case MAVLINK_MSG_ID_HIGH_LATENCY2:
         _handleHighLatency2(message);
         break;
@@ -847,6 +852,9 @@ void Vehicle::_mavlinkMessageReceived(LinkInterface* link, mavlink_message_t mes
     case MAVLINK_MSG_ID_OBSTACLE_DISTANCE:
         _handleObstacleDistance(message);
         break;
+    case MAVLINK_MSG_ID_NAV_CONTROLLER_OUTPUT:
+        _handleNavControllerOutput(message);
+    break;
 
     case MAVLINK_MSG_ID_SERIAL_CONTROL:
     {
@@ -1216,6 +1224,78 @@ void Vehicle::_handleGlobalPositionInt(mavlink_message_t& message)
     }
 }
 
+void Vehicle::_handleNavControllerOutput(mavlink_message_t& message) 
+{
+    mavlink_nav_controller_output_t nav_cont_out;
+    mavlink_msg_nav_controller_output_decode(&message, &nav_cont_out);
+
+    if (nav_cont_out.wp_dist == INT16_MAX) {
+        _distanceToNextWPFact.setRawValue(-1.0);
+    } else {
+        _distanceToNextWPFact.setRawValue((double)nav_cont_out.wp_dist);
+    }
+}
+
+void Vehicle::_handleHighLatency(mavlink_message_t& message)
+{
+    mavlink_high_latency_t highLatency;
+    mavlink_msg_high_latency_decode(&message, &highLatency);
+
+    QString previousFlightMode;
+    if (_base_mode != 0 || _custom_mode != 0){
+        // Vehicle is initialized with _base_mode=0 and _custom_mode=0. Don't pass this to flightMode() since it will complain about
+        // bad modes while unit testing.
+        previousFlightMode = flightMode();
+    }
+    _base_mode = MAV_MODE_FLAG_CUSTOM_MODE_ENABLED;
+    _custom_mode = _firmwarePlugin->highLatencyCustomModeTo32Bits(highLatency.custom_mode);
+    if (previousFlightMode != flightMode()) {
+        emit flightModeChanged(flightMode());
+    }
+
+    // Assume armed since we don't know
+    if (_armed != true) {
+        _armed = true;
+        emit armedChanged(_armed);
+    }
+
+    _coordinate.setLatitude(highLatency.latitude  / (double)1E7);
+    _coordinate.setLongitude(highLatency.longitude / (double)1E7);
+    _coordinate.setAltitude(highLatency.altitude_amsl);
+    emit coordinateChanged(_coordinate);
+
+    _airSpeedFact.setRawValue((double)highLatency.airspeed / 5.0);
+    _groundSpeedFact.setRawValue((double)highLatency.groundspeed / 5.0);
+    _climbRateFact.setRawValue((double)highLatency.climb_rate / 10.0);
+    // _headingFact.setRawValue((double)highLatency.heading * 2.0);
+    _altitudeRelativeFact.setRawValue(std::numeric_limits<double>::quiet_NaN());
+    _altitudeAMSLFact.setRawValue(highLatency.altitude_amsl);
+
+    // _windFactGroup.direction()->setRawValue((double)highLatency.wind_heading * 2.0);
+    // _windFactGroup.speed()->setRawValue((double)highLatency.windspeed / 5.0);
+
+    _battery1FactGroup.percentRemaining()->setRawValue(highLatency.battery_remaining);
+
+    // _temperatureFactGroup.temperature1()->setRawValue(highLatency.temperature_air);
+
+    _gpsFactGroup.lat()->setRawValue(highLatency.latitude * 1e-7);
+    _gpsFactGroup.lon()->setRawValue(highLatency.longitude * 1e-7);
+    _gpsFactGroup.mgrs()->setRawValue(convertGeoToMGRS(QGeoCoordinate(highLatency.latitude * 1e-7, highLatency.longitude * 1e-7)));
+    _gpsFactGroup.count()->setRawValue(0);
+
+    // We might need to adjust those values
+    _rollFact.setRawValue(highLatency.roll * 0.01);
+    _pitchFact.setRawValue(highLatency.pitch * 0.01);
+    _headingFact.setRawValue(highLatency.heading * 0.01);
+
+    // distance to waypoing
+    if (highLatency.wp_distance == INT16_MAX) {
+        _distanceToNextWPFact.setRawValue(-1.0);
+    } else {
+        _distanceToNextWPFact.setRawValue((double)highLatency.wp_distance);
+    }
+}
+
 void Vehicle::_handleHighLatency2(mavlink_message_t& message)
 {
     mavlink_high_latency2_t highLatency2;
@@ -1325,6 +1405,16 @@ void Vehicle::_setCapabilities(uint64_t capabilityBits)
     qCDebug(VehicleLog) << QString("Vehicle %1 MISSION_COMMAND_INT").arg(_capabilityBits & MAV_PROTOCOL_CAPABILITY_COMMAND_INT ? supports : doesNotSupport);
     qCDebug(VehicleLog) << QString("Vehicle %1 GeoFence").arg(_capabilityBits & MAV_PROTOCOL_CAPABILITY_MISSION_FENCE ? supports : doesNotSupport);
     qCDebug(VehicleLog) << QString("Vehicle %1 RallyPoints").arg(_capabilityBits & MAV_PROTOCOL_CAPABILITY_MISSION_RALLY ? supports : doesNotSupport);
+
+    if ( _capabilityBits & MAV_PROTOCOL_CAPABILITY_MISSION_FENCE )
+        qDebug() << " fence supported ";
+    else
+        qDebug() << "fence not suported";
+
+    if ( _capabilityBits & MAV_PROTOCOL_CAPABILITY_MISSION_RALLY )
+        qDebug() << " RALLY supported ";
+    else
+        qDebug() << "RALLY not suported";
 
     _setMaxProtoVersionFromBothSources();
 }

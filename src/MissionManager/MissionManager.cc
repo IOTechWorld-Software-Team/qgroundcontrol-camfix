@@ -227,6 +227,34 @@ void MissionManager::_mavlinkMessageReceived(const mavlink_message_t& message)
     case MAVLINK_MSG_ID_HEARTBEAT:
         _handleHeartbeat(message);
         break;
+
+    case MAVLINK_MSG_ID_HIGH_LATENCY2:
+        _handleHighLatency(message);
+        break;
+    }
+}
+
+void MissionManager::_handleHighLatency(const mavlink_message_t& message) 
+{
+    mavlink_high_latency_t highLatency;
+
+    mavlink_msg_high_latency_decode(&message, &highLatency);
+
+    if (highLatency.wp_num != _currentMissionIndex) {
+        qCDebug(MissionManagerLog) << "_handleHighLatency currentIndex:" << highLatency.wp_num;
+        _currentMissionIndex = highLatency.wp_num;
+        emit currentIndexChanged(_currentMissionIndex);
+    }
+
+    if (_currentMissionIndex != _lastCurrentIndex && _cachedLastCurrentIndex != _currentMissionIndex) {
+        // We have to be careful of an RTL sequence causing a change of index to the DO_LAND_START sequence. This also triggers
+        // a flight mode change away from mission flight mode. So we only update _lastCurrentIndex when the flight mode is mission.
+        // But we can run into problems where we may get the MISSION_CURRENT message for the RTL/DO_LAND_START sequenc change prior
+        // to the HEARTBEAT message which contains the flight mode change which will cause things to work incorrectly. To fix this
+        // We force the sequencing of HEARTBEAT following by MISSION_CURRENT by caching the possible _lastCurrentIndex update until
+        // the next HEARTBEAT comes through.
+        qCDebug(MissionManagerLog) << "_handleHighLatency caching _lastCurrentIndex for possible update:" << _currentMissionIndex;
+        _cachedLastCurrentIndex = _currentMissionIndex;
     }
 }
 

@@ -127,5 +127,11 @@
     "shortDescription": "Throttle %",
     "type":             "uint16",
     "units":            "%"
+},
+{
+    "name":             "distanceToNextWP",
+    "shortDescription": "Next WP distance",
+    "type":             "uint16",
+    "units":            "m"
 }
 ]

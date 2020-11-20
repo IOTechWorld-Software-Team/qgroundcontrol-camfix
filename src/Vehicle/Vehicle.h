@@ -673,6 +673,7 @@ public:
     Q_PROPERTY(Fact* distanceToGCS      READ distanceToGCS      CONSTANT)
     Q_PROPERTY(Fact* hobbs              READ hobbs              CONSTANT)
     Q_PROPERTY(Fact* throttlePct        READ throttlePct        CONSTANT)
+    Q_PROPERTY(Fact* distanceToNextWP   READ distanceToNextWP   CONSTANT)
 
     Q_PROPERTY(FactGroup* gps               READ gpsFactGroup               CONSTANT)
     Q_PROPERTY(FactGroup* battery           READ battery1FactGroup          CONSTANT)
@@ -986,6 +987,7 @@ public:
     Fact* distanceToGCS                     () { return &_distanceToGCSFact; }
     Fact* hobbs                             () { return &_hobbsFact; }
     Fact* throttlePct                       () { return &_throttlePctFact; }
+    Fact* distanceToNextWP                  () { return &_distanceToNextWPFact; }
 
     FactGroup* gpsFactGroup                 () { return &_gpsFactGroup; }
     FactGroup* battery1FactGroup            () { return &_battery1FactGroup; }
@@ -1303,6 +1305,8 @@ private:
     void _handleScaledPressure          (mavlink_message_t& message);
     void _handleScaledPressure2         (mavlink_message_t& message);
     void _handleScaledPressure3         (mavlink_message_t& message);
+    void _handleNavControllerOutput     (mavlink_message_t& message); 
+    void _handleHighLatency             (mavlink_message_t& message);
     void _handleHighLatency2            (mavlink_message_t& message);
     void _handleAttitudeWorker          (double rollRadians, double pitchRadians, double yawRadians);
     void _handleAttitude                (mavlink_message_t& message);
@@ -1566,6 +1570,7 @@ private:
     Fact _distanceToGCSFact;
     Fact _hobbsFact;
     Fact _throttlePctFact;
+    Fact _distanceToNextWPFact;
 
     VehicleGPSFactGroup             _gpsFactGroup;
     VehicleBatteryFactGroup         _battery1FactGroup;
@@ -1599,6 +1604,7 @@ private:
     static const char* _distanceToGCSFactName;
     static const char* _hobbsFactName;
     static const char* _throttlePctFactName;
+    static const char* _distanceToNextWPFactName;
 
     static const char* _gpsFactGroupName;
     static const char* _battery1FactGroupName;

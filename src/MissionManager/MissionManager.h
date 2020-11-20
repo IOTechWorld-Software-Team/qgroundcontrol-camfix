@@ -44,6 +44,7 @@ private slots:
 private:
     void _handleMissionCurrent(const mavlink_message_t& message);
     void _handleHeartbeat(const mavlink_message_t& message);
+    void _handleHighLatency(const mavlink_message_t& message);
 
     int _cachedLastCurrentIndex;
 };

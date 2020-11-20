@@ -152,6 +152,9 @@ signals:
     /// Emitted when a telemetry log is started to save.
     void checkTelemetrySavePath(void);
 
+    /// Emited when a new radio status is received, for ground unit display
+    void radioStatusMessage(mavlink_radio_status_t radiostatus);
+
 private slots:
     void _vehicleCountChanged(void);
     

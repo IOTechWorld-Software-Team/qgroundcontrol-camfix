@@ -679,6 +679,7 @@ HEADERS += \
     src/comm/LinkManager.h \
     src/comm/LogReplayLink.h \
     src/comm/MAVLinkProtocol.h \
+    src/comm/TelemetryGroundUnit.h \
     src/comm/QGCMAVLink.h \
     src/comm/TCPLink.h \
     src/comm/UDPLink.h \
@@ -882,6 +883,7 @@ SOURCES += \
     src/comm/LinkManager.cc \
     src/comm/LogReplayLink.cc \
     src/comm/MAVLinkProtocol.cc \
+    src/comm/TelemetryGroundUnit.cc \
     src/comm/QGCMAVLink.cc \
     src/comm/TCPLink.cc \
     src/comm/UDPLink.cc \

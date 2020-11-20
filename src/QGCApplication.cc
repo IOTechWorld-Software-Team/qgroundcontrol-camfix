@@ -131,6 +131,8 @@
 
 #include "QGCMapEngine.h"
 
+#include "TelemetryGroundUnit.h"
+
 class FinishVideoInitialization : public QRunnable
 {
 public:
@@ -551,6 +553,9 @@ void QGCApplication::_initCommon()
     qmlRegisterSingletonType<QGroundControlQmlGlobal>   ("QGroundControl",                          1, 0, "QGroundControl",         qgroundcontrolQmlGlobalSingletonFactory);
     qmlRegisterSingletonType<ScreenToolsController>     ("QGroundControl.ScreenToolsController",    1, 0, "ScreenToolsController",  screenToolsControllerSingletonFactory);
     qmlRegisterSingletonType<ShapeFileHelper>           ("QGroundControl.ShapeFileHelper",          1, 0, "ShapeFileHelper",        shapeFileHelperSingletonFactory);
+
+    // AerialMetric
+    qmlRegisterUncreatableType<TelemetryGroundUnit>     ("QGroundControl",                  1, 0, "TelemetryGroundUnit",        kRefOnly);
 }
 
 bool QGCApplication::_initForNormalAppBoot()

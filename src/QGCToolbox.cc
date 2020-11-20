@@ -46,6 +46,8 @@
 #include "MicrohardManager.h"
 #endif
 
+#include "TelemetryGroundUnit.h"
+
 #if defined(QGC_CUSTOM_BUILD)
 #include CUSTOMHEADER
 #endif
@@ -92,6 +94,8 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
 #if defined(QGC_GST_MICROHARD_ENABLED)
     _microhardManager       = new MicrohardManager          (app, this);
 #endif
+
+    _telemetryGroundUnit    = new TelemetryGroundUnit       (app, this);
 }
 
 void QGCToolbox::setChildToolboxes(void)
@@ -128,6 +132,8 @@ void QGCToolbox::setChildToolboxes(void)
 #if defined(QGC_ENABLE_PAIRING)
     _pairingManager->setToolbox(this);
 #endif
+
+    _telemetryGroundUnit->setToolbox(this);
 }
 
 void QGCToolbox::_scanAndLoadPlugins(QGCApplication* app)

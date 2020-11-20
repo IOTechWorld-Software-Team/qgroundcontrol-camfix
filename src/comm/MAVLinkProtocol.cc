@@ -39,6 +39,8 @@
 #include "MultiVehicleManager.h"
 #include "SettingsManager.h"
 
+#include "TelemetryGroundUnit.h"
+
 Q_DECLARE_METATYPE(mavlink_message_t)
 
 QGC_LOGGING_CATEGORY(MAVLinkProtocolLog, "MAVLinkProtocolLog")
@@ -118,6 +120,8 @@ void MAVLinkProtocol::setToolbox(QGCToolbox *toolbox)
 
    connect(_multiVehicleManager, &MultiVehicleManager::vehicleAdded, this, &MAVLinkProtocol::_vehicleCountChanged);
    connect(_multiVehicleManager, &MultiVehicleManager::vehicleRemoved, this, &MAVLinkProtocol::_vehicleCountChanged);
+
+   connect(this, &MAVLinkProtocol::radioStatusMessage,      _app->toolbox()->telemetryGroundUnit(), &TelemetryGroundUnit::_radioStatusInfo);
 
    emit versionCheckChanged(m_enable_version_check);
 }
@@ -310,6 +314,12 @@ void MAVLinkProtocol::receiveBytes(LinkInterface* link, QByteArray b)
                 mavlink_heartbeat_t heartbeat;
                 mavlink_msg_heartbeat_decode(&_message, &heartbeat);
                 emit vehicleHeartbeatInfo(link, _message.sysid, _message.compid, heartbeat.autopilot, heartbeat.type);
+            }
+
+            if (_message.msgid == MAVLINK_MSG_ID_RADIO_STATUS) {
+                mavlink_radio_status_t radiostatus;
+                mavlink_msg_radio_status_decode(&_message, &radiostatus);
+                emit radioStatusMessage(radiostatus);
             }
 
             if (_message.msgid == MAVLINK_MSG_ID_HIGH_LATENCY2) {

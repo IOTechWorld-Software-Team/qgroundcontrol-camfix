@@ -228,7 +228,7 @@ void MissionManager::_mavlinkMessageReceived(const mavlink_message_t& message)
         _handleHeartbeat(message);
         break;
 
-    case MAVLINK_MSG_ID_HIGH_LATENCY2:
+    case MAVLINK_MSG_ID_HIGH_LATENCY:
         _handleHighLatency(message);
         break;
     }

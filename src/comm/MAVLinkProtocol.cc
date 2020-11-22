@@ -317,9 +317,11 @@ void MAVLinkProtocol::receiveBytes(LinkInterface* link, QByteArray b)
             }
 
             if (_message.msgid == MAVLINK_MSG_ID_RADIO_STATUS) {
-                mavlink_radio_status_t radiostatus;
-                mavlink_msg_radio_status_decode(&_message, &radiostatus);
-                emit radioStatusMessage(radiostatus);
+                if (_message.sysid == 249) { // only for messages comming from ground unit
+                    mavlink_radio_status_t radiostatus;
+                    mavlink_msg_radio_status_decode(&_message, &radiostatus);
+                    emit radioStatusMessage(radiostatus);
+                }
             }
 
             if (_message.msgid == MAVLINK_MSG_ID_HIGH_LATENCY2) {

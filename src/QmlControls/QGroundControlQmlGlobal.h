@@ -42,6 +42,8 @@ class MicrohardManager;
 #include "MockLink.h"
 #endif
 
+#include "TelemetryGroundUnit.h"
+
 class QGCToolbox;
 
 class QGroundControlQmlGlobal : public QGCTool
@@ -96,6 +98,8 @@ public:
     Q_PROPERTY(qreal zOrderWaypointIndicators   READ zOrderWaypointIndicators   CONSTANT)
     Q_PROPERTY(qreal zOrderTrajectoryLines      READ zOrderTrajectoryLines      CONSTANT)
     Q_PROPERTY(qreal zOrderWaypointLines        READ zOrderWaypointLines        CONSTANT)
+
+    Q_PROPERTY(TelemetryGroundUnit* telemetryGroundUnit READ telemetryGroundUnit    CONSTANT)
 
     //-------------------------------------------------------------------------
     // MavLink Protocol
@@ -206,6 +210,8 @@ public:
     bool                    microhardSupported  () { return false; }
 #endif
 
+    TelemetryGroundUnit*    telemetryGroundUnit () { return _telemetryGroundUnit; }
+
     qreal zOrderTopMost             () { return 1000; }
     qreal zOrderWidgets             () { return 100; }
     qreal zOrderMapItems            () { return 50; }
@@ -283,6 +289,8 @@ private:
 #if defined(QGC_ENABLE_PAIRING)
     PairingManager*         _pairingManager         = nullptr;
 #endif
+
+    TelemetryGroundUnit*    _telemetryGroundUnit    = nullptr;
 
     bool                    _skipSetupPage          = false;
 

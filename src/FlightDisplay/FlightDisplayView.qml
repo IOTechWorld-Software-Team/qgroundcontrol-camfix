@@ -807,4 +807,235 @@ Item {
         }
     }
 
+    Rectangle {
+        id:             telemetryRectangle
+        anchors.right:  parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins:_toolsMargin
+        height:         ScreenTools.defaultFontPixelWidth * 20
+        width:          ScreenTools.defaultFontPixelWidth * 40
+        color:          qgcPal.window
+        radius:         10
+
+        Rectangle {
+                id:                       tittleTelemetryGround
+                anchors.top:              parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                height:                   ScreenTools.defaultFontPixelHeight
+                width:                    ScreenTools.defaultFontPixelWidth * 6
+                radius:                   10
+                color:                    qgcPal.window
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   "Ground Unit Status"
+                }
+            }
+
+
+        GridLayout {
+            anchors.bottom:         parent.bottom
+            anchors.right:          parent.right
+            anchors.left:           parent.left
+            anchors.top:            tittleTelemetryGround.bottom
+            
+            anchors.topMargin:      ScreenTools.defaultFontPixelWidth * 0.5
+            anchors.bottomMargin:   ScreenTools.defaultFontPixelWidth * 0.5
+            anchors.leftMargin:     ScreenTools.defaultFontPixelWidth
+            anchors.rightMargin:    ScreenTools.defaultFontPixelWidth
+
+            columnSpacing:          ScreenTools.defaultFontPixelWidth * 0.5
+            rowSpacing:             ScreenTools.defaultFontPixelWidth * 0.5
+            columns:                4
+            rows:                   7
+            flow:                   GridLayout.LeftToRight
+            visible:                true
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sbd Quality: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   QGroundControl.telemetryGroundUnit.sbdQuality
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sms Quality 1: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   QGroundControl.telemetryGroundUnit.smsQuality1
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sms Quality 2: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   QGroundControl.telemetryGroundUnit.smsQuality2
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sms Quality 3: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   QGroundControl.telemetryGroundUnit.smsQuality3
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "UnderVoltage: " 
+                elide:                  Text.ElideRight
+
+                visible:                (QGroundControl.telemetryGroundUnit.ocurredLowVolt || QGroundControl.telemetryGroundUnit.lowVolt)
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  QGroundControl.telemetryGroundUnit.lowVolt ? "darkred" : "darkgoldenrod"
+
+                visible:                (QGroundControl.telemetryGroundUnit.ocurredLowVolt || QGroundControl.telemetryGroundUnit.lowVolt)
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   QGroundControl.telemetryGroundUnit.lowVolt ? "Low Voltage happening now" : "Low Voltage has ocurred"
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Throttling: " 
+                elide:                  Text.ElideRight
+
+                visible:                (QGroundControl.telemetryGroundUnit.ocurredThrottled || QGroundControl.telemetryGroundUnit.currentlyThrottled)
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  QGroundControl.telemetryGroundUnit.currentlyThrottled ? "darkred" : "darkgoldenrod"
+
+                visible:                (QGroundControl.telemetryGroundUnit.ocurredThrottled || QGroundControl.telemetryGroundUnit.currentlyThrottled)
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   QGroundControl.telemetryGroundUnit.currentlyThrottled ? "Throttling happening now" : "Throttling has ocurred"                 
+                }
+            }
+        }
+    }
 }

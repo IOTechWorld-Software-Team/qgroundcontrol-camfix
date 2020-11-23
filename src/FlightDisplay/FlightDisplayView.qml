@@ -1038,4 +1038,269 @@ Item {
             }
         }
     }
+
+    Rectangle {
+        id:             telemetryRectangleAir
+        anchors.right:  telemetryRectangle.left
+        anchors.bottom: parent.bottom
+        anchors.margins:_toolsMargin
+        height:         ScreenTools.defaultFontPixelWidth * 20
+        width:          ScreenTools.defaultFontPixelWidth * 40
+        color:          qgcPal.window
+        radius:         10
+
+        Rectangle {
+                id:                       tittleTelemetryAir
+                anchors.top:              parent.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                height:                   ScreenTools.defaultFontPixelHeight
+                width:                    ScreenTools.defaultFontPixelWidth * 6
+                radius:                   10
+                color:                    qgcPal.window
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   "Air Unit Status (Active Vehicle)"
+                }
+            }
+
+
+        GridLayout {
+            anchors.bottom:         parent.bottom
+            anchors.right:          parent.right
+            anchors.left:           parent.left
+            anchors.top:            tittleTelemetryAir.bottom
+            
+            anchors.topMargin:      ScreenTools.defaultFontPixelWidth * 0.5
+            anchors.bottomMargin:   ScreenTools.defaultFontPixelWidth * 0.5
+            anchors.leftMargin:     ScreenTools.defaultFontPixelWidth
+            anchors.rightMargin:    ScreenTools.defaultFontPixelWidth
+
+            columnSpacing:          ScreenTools.defaultFontPixelWidth * 0.5
+            rowSpacing:             ScreenTools.defaultFontPixelWidth * 0.5
+            columns:                4
+            rows:                   7
+            flow:                   GridLayout.LeftToRight
+            visible:                true
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Active Link: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   ( activeVehicle.activeLinkAM == 0 ) ? "WIFI" :
+                                            ( activeVehicle.activeLinkAM == 1 ) ? "RFD" :
+                                            ( activeVehicle.activeLinkAM == 2 ) ? "GSM" :
+                                            ( activeVehicle.activeLinkAM == 3 ) ? "SBD" :
+                                            "UNKNOWN"
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sbd Quality: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   activeVehicle.sbdQuality
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sms Quality 1: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   activeVehicle.smsQuality1
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sms Quality 2: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   activeVehicle.smsQuality2
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Sms Quality 3: "
+                elide:                  Text.ElideRight
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  qgcPal.windowShade
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   activeVehicle.smsQuality3
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "UnderVoltage: " 
+                elide:                  Text.ElideRight
+
+                visible:                (activeVehicle.ocurredLowVolt || activeVehicle.lowVolt)
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  activeVehicle.lowVolt ? "darkred" : "darkgoldenrod"
+
+                visible:                (activeVehicle.ocurredLowVolt || activeVehicle.lowVolt)
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   activeVehicle.lowVolt ? "Low Voltage happening now" : "Low Voltage has ocurred"
+                }
+            }
+
+            QGCLabel {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      1
+        
+                font.pointSize:         ScreenTools.smallFontPointSize
+                text:                   "Throttling: " 
+                elide:                  Text.ElideRight
+
+                visible:                (activeVehicle.ocurredThrottled || activeVehicle.currentlyThrottled)
+            }
+        
+            Rectangle {
+                Layout.fillWidth:       true
+                Layout.fillHeight:      true
+                Layout.columnSpan:      3
+        
+                width:                  ScreenTools.defaultFontPixelWidth * 6
+                radius:                 10
+                color:                  activeVehicle.currentlyThrottled ? "darkred" : "darkgoldenrod"
+
+                visible:                (activeVehicle.ocurredThrottled || activeVehicle.currentlyThrottled)
+        
+                QGCLabel {
+                    anchors.fill:           parent
+                    horizontalAlignment:    Text.AlignHCenter           
+                    verticalAlignment:      Text.AlignVCenter
+
+                    font.pointSize:         ScreenTools.smallFontPointSize
+                    text:                   activeVehicle.currentlyThrottled ? "Throttling happening now" : "Throttling has ocurred"                 
+                }
+            }
+        }
+    }
 }

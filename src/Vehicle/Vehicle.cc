@@ -1858,64 +1858,130 @@ void Vehicle::_handleHeartbeat(mavlink_message_t& message)
     }
 }
 
+// void Vehicle::_handleRadioStatus(mavlink_message_t& message)
+// {
+
+//     //-- Process telemetry status message
+//     mavlink_radio_status_t rstatus;
+//     mavlink_msg_radio_status_decode(&message, &rstatus);
+
+//     int rssi    = rstatus.rssi;
+//     int remrssi = rstatus.remrssi;
+//     int lnoise = (int)(int8_t)rstatus.noise;
+//     int rnoise = (int)(int8_t)rstatus.remnoise;
+//     //-- 3DR Si1k radio needs rssi fields to be converted to dBm
+//     if (message.sysid == '3' && message.compid == 'D') {
+//         /* Per the Si1K datasheet figure 23.25 and SI AN474 code
+//          * samples the relationship between the RSSI register
+//          * and received power is as follows:
+//          *
+//          *                       10
+//          * inputPower = rssi * ------ 127
+//          *                       19
+//          *
+//          * Additionally limit to the only realistic range [-120,0] dBm
+//          */
+//         rssi    = qMin(qMax(qRound(static_cast<qreal>(rssi)    / 1.9 - 127.0), - 120), 0);
+//         remrssi = qMin(qMax(qRound(static_cast<qreal>(remrssi) / 1.9 - 127.0), - 120), 0);
+//     } else {
+//         rssi    = (int)(int8_t)rstatus.rssi;
+//         remrssi = (int)(int8_t)rstatus.remrssi;
+//     }
+//     //-- Check for changes
+//     if(_telemetryLRSSI != rssi) {
+//         _telemetryLRSSI = rssi;
+//         emit telemetryLRSSIChanged(_telemetryLRSSI);
+//     }
+//     if(_telemetryRRSSI != remrssi) {
+//         _telemetryRRSSI = remrssi;
+//         emit telemetryRRSSIChanged(_telemetryRRSSI);
+//     }
+//     if(_telemetryRXErrors != rstatus.rxerrors) {
+//         _telemetryRXErrors = rstatus.rxerrors;
+//         emit telemetryRXErrorsChanged(_telemetryRXErrors);
+//     }
+//     if(_telemetryFixed != rstatus.fixed) {
+//         _telemetryFixed = rstatus.fixed;
+//         emit telemetryFixedChanged(_telemetryFixed);
+//     }
+//     if(_telemetryTXBuffer != rstatus.txbuf) {
+//         _telemetryTXBuffer = rstatus.txbuf;
+//         emit telemetryTXBufferChanged(_telemetryTXBuffer);
+//     }
+//     if(_telemetryLNoise != lnoise) {
+//         _telemetryLNoise = lnoise;
+//         emit telemetryLNoiseChanged(_telemetryLNoise);
+//     }
+//     if(_telemetryRNoise != rnoise) {
+//         _telemetryRNoise = rnoise;
+//         emit telemetryRNoiseChanged(_telemetryRNoise);
+//     }
+// }
+
 void Vehicle::_handleRadioStatus(mavlink_message_t& message)
 {
+    if ( message.sysid != _id || message.compid != 10 ) {
+        return;
+    }
 
     //-- Process telemetry status message
-    mavlink_radio_status_t rstatus;
-    mavlink_msg_radio_status_decode(&message, &rstatus);
+    mavlink_radio_status_t radiostatus;
+    mavlink_msg_radio_status_decode(&message, &radiostatus);
 
-    int rssi    = rstatus.rssi;
-    int remrssi = rstatus.remrssi;
-    int lnoise = (int)(int8_t)rstatus.noise;
-    int rnoise = (int)(int8_t)rstatus.remnoise;
-    //-- 3DR Si1k radio needs rssi fields to be converted to dBm
-    if (message.sysid == '3' && message.compid == 'D') {
-        /* Per the Si1K datasheet figure 23.25 and SI AN474 code
-         * samples the relationship between the RSSI register
-         * and received power is as follows:
-         *
-         *                       10
-         * inputPower = rssi * ------ 127
-         *                       19
-         *
-         * Additionally limit to the only realistic range [-120,0] dBm
-         */
-        rssi    = qMin(qMax(qRound(static_cast<qreal>(rssi)    / 1.9 - 127.0), - 120), 0);
-        remrssi = qMin(qMax(qRound(static_cast<qreal>(remrssi) / 1.9 - 127.0), - 120), 0);
-    } else {
-        rssi    = (int)(int8_t)rstatus.rssi;
-        remrssi = (int)(int8_t)rstatus.remrssi;
-    }
-    //-- Check for changes
-    if(_telemetryLRSSI != rssi) {
-        _telemetryLRSSI = rssi;
-        emit telemetryLRSSIChanged(_telemetryLRSSI);
-    }
-    if(_telemetryRRSSI != remrssi) {
-        _telemetryRRSSI = remrssi;
-        emit telemetryRRSSIChanged(_telemetryRRSSI);
-    }
-    if(_telemetryRXErrors != rstatus.rxerrors) {
-        _telemetryRXErrors = rstatus.rxerrors;
-        emit telemetryRXErrorsChanged(_telemetryRXErrors);
-    }
-    if(_telemetryFixed != rstatus.fixed) {
-        _telemetryFixed = rstatus.fixed;
-        emit telemetryFixedChanged(_telemetryFixed);
-    }
-    if(_telemetryTXBuffer != rstatus.txbuf) {
-        _telemetryTXBuffer = rstatus.txbuf;
-        emit telemetryTXBufferChanged(_telemetryTXBuffer);
-    }
-    if(_telemetryLNoise != lnoise) {
-        _telemetryLNoise = lnoise;
-        emit telemetryLNoiseChanged(_telemetryLNoise);
-    }
-    if(_telemetryRNoise != rnoise) {
-        _telemetryRNoise = rnoise;
-        emit telemetryRNoiseChanged(_telemetryRNoise);
-    }
+    _sbd_quality = radiostatus.rxerrors;
+    _sms_quality1 = radiostatus.rssi;
+    _sms_quality2 = radiostatus.remrssi;
+    _sms_quality3 = radiostatus.txbuf;
+    _status_bitmask = radiostatus.noise;
+    _link_bitmask = radiostatus.remnoise; // always 0, depends on the aircraft
+
+    // sys status bitmask
+    if ( _status_bitmask & (1 << 0) ) // Low voltage happening
+        _lowVolt = true;
+    else
+        _lowVolt = false;
+
+    if ( _status_bitmask & (1 << 2) ) // throttling happening
+        _currentlyThrottled = true;
+    else
+        _currentlyThrottled = false;
+    
+    if ( _status_bitmask & (1 << 4) ) // low voltage ocurred
+        _ocurredLowVolt = true;
+    else
+        _ocurredLowVolt = false;
+    
+    if ( _status_bitmask & (1 << 6) ) // throttling ocurred
+        _ocurredThrottled = true;
+    else
+        _ocurredThrottled = false;
+
+    // link bitmask
+    qDebug() << "activelink bitmask: " << _link_bitmask;
+
+    if ( _link_bitmask & (1 << 0) ) 
+    _activeLinkAM = 1;
+    
+    else
+    _activeLinkAM = 0;
+    
+    if ( _link_bitmask & (1 << 1) ) 
+    _activeLinkAM = 2;
+    
+    if ( _link_bitmask & (1 << 2) ) 
+    _activeLinkAM = 3;
+
+    qDebug() << "activelink: " << _activeLinkAM;
+
+    emit onSbdQualityChanged();
+    emit onSmsQuality1Changed();
+    emit onSmsQuality2Changed();
+    emit onSmsQuality3Changed();
+    emit onCurrentlyThrottledChanged();
+    emit onOcurredThrottledChanged();
+    emit onLowVoltChanged();
+    emit onOcurredLowVoltChanged();
+    emit onActiveLinkAMChanged();
 }
 
 void Vehicle::_handleRCChannels(mavlink_message_t& message)

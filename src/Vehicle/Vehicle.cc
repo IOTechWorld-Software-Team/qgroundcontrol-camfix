@@ -1957,8 +1957,6 @@ void Vehicle::_handleRadioStatus(mavlink_message_t& message)
         _ocurredThrottled = false;
 
     // link bitmask
-    qDebug() << "activelink bitmask: " << _link_bitmask;
-
     if ( _link_bitmask & (1 << 0) ) 
     _activeLinkAM = 1;
     
@@ -1970,8 +1968,6 @@ void Vehicle::_handleRadioStatus(mavlink_message_t& message)
     
     if ( _link_bitmask & (1 << 2) ) 
     _activeLinkAM = 3;
-
-    qDebug() << "activelink: " << _activeLinkAM;
 
     emit onSbdQualityChanged();
     emit onSmsQuality1Changed();

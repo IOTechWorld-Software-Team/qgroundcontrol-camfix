@@ -1,0 +1,82 @@
+name: Build QGC MacOS 
+
+on: 
+    push:
+        branches:
+        - action-build-macOS
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  JOBS: 3
+  SPEC: macx-clang
+  CONFIG: installer
+  ACTIONS_BUILD_DIR: ${{ github.workspace }}/../qgroundcontrol
+
+jobs:
+  build-job:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        exclude:
+          - os: ubuntu-latest
+          - os: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Before install
+        run:  |
+              git fetch --unshallow && git fetch --all --tags
+              export JOBS=$((`sysctl -n hw.ncpu`+1))
+
+      - name: install QT via action
+        uses: jurplel/install-qt-action@v2
+        with: 
+          version: '5.12.6'
+          host: 'mac'
+          target: 'desktop'
+          dir: '${{ runner.temp }}'
+          modules: 'qtcharts'
+          setup-python: 'false'
+
+      - name: Install Gstreamer
+        run:  |
+              wget --quiet https://qgroundcontrol.s3-us-west-2.amazonaws.com/dependencies/gstreamer-osx-1.18.1.tar.bz2
+              sudo tar -zxf gstreamer-osx-1.18.1.tar.bz2 -C /Library/Frameworks
+        
+      - name: mkdir directory shadow_build
+        run:  mkdir ${{ runner.temp }}/shadow_build_dir
+
+      - name: run qmake and build
+        working-directory: ${{ runner.temp }}/shadow_build_dir
+        run:  |
+              qmake -r ${ACTIONS_BUILD_DIR}/qgroundcontrol.pro CONFIG+=${CONFIG}
+              make -j$JOBS
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ runner.temp }}/shadow_build_dir/package/QGroundControl.dmg
+          asset_name: macOSTest
+          asset_content_type: application/x-apple-diskimage

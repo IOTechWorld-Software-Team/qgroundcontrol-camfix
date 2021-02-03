@@ -3,7 +3,7 @@ name: Build QGC MacOS
 on: 
     push:
         branches:
-        - action-build-macOS
+        - github_actions_PR
 
 defaults:
   run:

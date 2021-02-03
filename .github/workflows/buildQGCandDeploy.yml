@@ -78,5 +78,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ runner.temp }}/shadow_build_dir/package/QGroundControl.dmg
-          asset_name: macOSTest
+          asset_name: QGroundControl.dmg
           asset_content_type: application/x-apple-diskimage

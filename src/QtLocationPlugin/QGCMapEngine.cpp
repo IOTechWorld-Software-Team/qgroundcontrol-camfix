@@ -166,7 +166,7 @@ QGCMapEngine::init()
         qCritical() << "Could not find suitable map cache directory.";
     }
     QGCMapTask* task = new QGCMapTask(QGCMapTask::taskInit);
-    _worker.enqueueTask(task);
+    _worker.enqueueTask(task); // we have a method for this
 }
 
 //-----------------------------------------------------------------------------
@@ -374,7 +374,7 @@ QGCMapEngine::concurrentDownloads(QString type)
     // TODO : We may want different values depending on
     // the provider here, let it like this as all provider are set to 12
     // at the moment
-    return 12;
+    return 12; // may be worth changing?
 }
 
 //-----------------------------------------------------------------------------
@@ -405,4 +405,5 @@ QGCMapEngine::_internetStatus(bool active)
     }
 }
 
+// interesting to check this?
 // Resolution math: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#Resolution_and_Scale

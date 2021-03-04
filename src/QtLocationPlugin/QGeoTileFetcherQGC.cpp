@@ -73,6 +73,7 @@ QGeoTileFetcherQGC::~QGeoTileFetcherQGC()
 QGeoTiledMapReply*
 QGeoTileFetcherQGC::getTileImage(const QGeoTileSpec &spec)
 {
+    qDebug() << "getTileImage: zoom: " << spec.zoom() << "x: " << spec.x() << "y: " << spec.y() << "mapid: " << spec.mapId() << "version: " << spec.version();
     //-- Build URL
     QNetworkRequest request = getQGCMapEngine()->urlFactory()->getTileURL(spec.mapId(), spec.x(), spec.y(), spec.zoom(), _networkManager);
     if ( ! request.url().isEmpty() ) {

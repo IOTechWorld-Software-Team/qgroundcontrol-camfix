@@ -130,45 +130,59 @@ QGCCacheWorker::run()
             _mutex.unlock();
             switch(task->type()) {
                 case QGCMapTask::taskInit:
+                    qDebug() << "taskinit";
                     break;
                 case QGCMapTask::taskCacheTile:
                     _saveTile(task);
+                    qDebug() << "taskcachetile";
                     break;
                 case QGCMapTask::taskFetchTile:
                     _getTile(task);
+                    qDebug() << "taskfetchtile";
                     break;
                 case QGCMapTask::taskFetchTileSets:
                     _getTileSets(task);
+                    qDebug() << "taskfetchtilesets";
                     break;
                 case QGCMapTask::taskCreateTileSet:
                     _createTileSet(task);
+                    qDebug() << "taskcreatetileset";
                     break;
                 case QGCMapTask::taskGetTileDownloadList:
                     _getTileDownloadList(task);
+                    qDebug() << "taskgettiledownloadlist";
                     break;
                 case QGCMapTask::taskUpdateTileDownloadState:
                     _updateTileDownloadState(task);
+                    qDebug() << "taskupdatetiledownloadstate";
                     break;
                 case QGCMapTask::taskDeleteTileSet:
                     _deleteTileSet(task);
+                    qDebug() << "taskdeletetileset";
                     break;
                 case QGCMapTask::taskRenameTileSet:
                     _renameTileSet(task);
+                    qDebug() << "taskrenametileset";
                     break;
                 case QGCMapTask::taskPruneCache:
                     _pruneCache(task);
+                    qDebug() << "taskprunecache";
                     break;
                 case QGCMapTask::taskReset:
                     _resetCacheDatabase(task);
+                    qDebug() << "taskreset";
                     break;
                 case QGCMapTask::taskExport:
                     _exportSets(task);
+                    qDebug() << "taskexport";
                     break;
                 case QGCMapTask::taskImport:
                     _importSets(task);
+                    qDebug() << "taskimport";
                     break;
                 case QGCMapTask::taskTestInternet:
                     _testInternet();
+                    qDebug() << "testinternet";
                     break;
             }
             task->deleteLater();
@@ -337,6 +351,7 @@ QGCCacheWorker::_getTile(QGCMapTask* mtask)
     if(!found) {
         qCDebug(QGCTileCacheLog) << "_getTile() (NOT in DB) HASH:" << task->hash();
         task->setError("Tile not in cache database");
+        qDebug() << "tile not in cache";
     }
 }
 

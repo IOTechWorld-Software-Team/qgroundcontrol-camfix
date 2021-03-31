@@ -55,6 +55,22 @@ ApplicationWindow {
         }
 
         function nextPrompt() {
+            if (rgPromptIds[nextPromptIdIndex] == 10001) { // we bypass here the automatic system for showing prompts. Important to mark as shown.
+                // setup video source, apparently setting it from json wasnt working
+                QGroundControl.settingsManager.videoSettings.videoSource.value = "RTSP Video Stream"
+                // setup comm links
+                var startupConfig
+                startupConfig = QGroundControl.linkManager.createConfiguration(1, "ARACE SIRIN HD-LINK") // 1 is udp
+                startupConfig.autoConnect = true
+                startupConfig.localPort = "14551"
+                startupConfig.dynamic = false
+                QGroundControl.linkManager.endCreateConfiguration(startupConfig)
+                QGroundControl.linkManager.preventLoadLinksFromConfig() 
+                startupConfig = null
+                // mark fistrunprompts already done
+                QGroundControl.settingsManager.appSettings.firstRunPromptIdsMarkIdAsShown(rgPromptIds[nextPromptIdIndex])
+                return
+            }
             if (nextPromptIdIndex < rgPromptIds.length) {
                 var component = Qt.createComponent(QGroundControl.corePlugin.firstRunPromptResource(rgPromptIds[nextPromptIdIndex]));
                 currentDialog = component.createObject(mainWindow)

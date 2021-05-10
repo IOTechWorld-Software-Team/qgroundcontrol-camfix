@@ -530,12 +530,12 @@ Item {
                 onClicked:          _resetPolygon()
             }
 
-            QGCButton {
-                _horizontalPadding: 0
-                text:               qsTr("Circular")
-                visible:            !mapPolygon.traceMode
-                onClicked:          _resetCircle()
-            }
+            // QGCButton {
+            //     _horizontalPadding: 0
+            //     text:               qsTr("Circular")
+            //     visible:            !mapPolygon.traceMode
+            //     onClicked:          _resetCircle()
+            // }
 
             QGCButton {
                 _horizontalPadding: 0

@@ -279,7 +279,7 @@ Rectangle {
         anchors.left:       parent.left
         anchors.top:        topRowLayout.bottom
         source:             missionItem.editorQml
-        visible:            _currentItem
+        visible:            _currentItem && missionItem.editorQml != "qrc:/qml/MissionSettingsEditor.qml"
 
         property var    masterController:   _masterController
         property real   availableWidth:     _root.width - (anchors.margins * 2) ///< How wide the editor should be

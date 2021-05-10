@@ -638,21 +638,21 @@ void PlanMasterController::_updatePlanCreatorsList(void)
     if (!_flyView) {
         if (!_planCreators) {
             _planCreators = new QmlObjectListModel(this);
-            _planCreators->append(new BlankPlanCreator(this, this));
             _planCreators->append(new SurveyPlanCreator(this, this));
-            _planCreators->append(new CorridorScanPlanCreator(this, this));
+            //_planCreators->append(new BlankPlanCreator(this, this));
+            // _planCreators->append(new CorridorScanPlanCreator(this, this));
             emit planCreatorsChanged(_planCreators);
         }
 
-        if (_managerVehicle->fixedWing()) {
-            if (_planCreators->count() == 4) {
-                _planCreators->removeAt(_planCreators->count() - 1);
-            }
-        } else {
-            if (_planCreators->count() != 4) {
-                _planCreators->append(new StructureScanPlanCreator(this, this));
-            }
-        }
+        // if (_managerVehicle->fixedWing()) {
+        //     if (_planCreators->count() == 4) {
+        //         _planCreators->removeAt(_planCreators->count() - 1);
+        //     }
+        // } else {
+        //     if (_planCreators->count() != 4) {
+        //         _planCreators->append(new StructureScanPlanCreator(this, this));
+        //     }
+        // }
     }
 }
 

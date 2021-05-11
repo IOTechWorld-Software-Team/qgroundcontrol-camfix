@@ -3709,6 +3709,12 @@ void Vehicle::flashBootloader()
 }
 #endif
 
+void Vehicle::toggleGenerator(void) 
+{
+    // prov, implement automatic based on generator state
+    qDebug() << "provisional message: toggle Generator";
+}
+
 void Vehicle::gimbalControlValue(double pitch, double yaw)
 {
     //qDebug() << "Gimbal:" << pitch << yaw;

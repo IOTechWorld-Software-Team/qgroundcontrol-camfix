@@ -421,6 +421,8 @@ public:
     Q_INVOKABLE void flashBootloader();
 #endif
 
+    Q_INVOKABLE void toggleGenerator(void);
+
     bool    guidedModeSupported     () const;
     bool    pauseVehicleSupported   () const;
     bool    orbitModeSupported      () const;

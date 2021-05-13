@@ -63,14 +63,14 @@ public:
             delete pMAVLink;
         if(pConsole)
             delete pConsole;
-#if defined(QT_DEBUG)
+// #if defined(QT_DEBUG)
         if(pMockLink)
             delete pMockLink;
         if(pDebug)
             delete pDebug;
         if(pQmlTest)
             delete pQmlTest;
-#endif
+// #endif
         if(defaultOptions)
             delete defaultOptions;
     }
@@ -90,11 +90,11 @@ public:
     QmlComponentInfo* pMAVLink                  = nullptr;
     QmlComponentInfo* pConsole                  = nullptr;
     QmlComponentInfo* pHelp                     = nullptr;
-#if defined(QT_DEBUG)
+// #if defined(QT_DEBUG)
     QmlComponentInfo* pMockLink                 = nullptr;
     QmlComponentInfo* pDebug                    = nullptr;
     QmlComponentInfo* pQmlTest                  = nullptr;
-#endif
+// #endif
 
     QGCOptions*         defaultOptions          = nullptr;
     QVariantList        settingsList;
@@ -171,7 +171,7 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pHelp = new QmlComponentInfo(tr("Help"),
                                          QUrl::fromUserInput("qrc:/qml/HelpSettings.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pHelp)));
-#if defined(QT_DEBUG)
+// #if defined(QT_DEBUG)
         //-- These are always present on Debug builds
         _p->pMockLink = new QmlComponentInfo(tr("Mock Link"),
                                              QUrl::fromUserInput("qrc:/qml/MockLink.qml"));
@@ -182,7 +182,7 @@ QVariantList &QGCCorePlugin::settingsPages()
         _p->pQmlTest = new QmlComponentInfo(tr("Palette Test"),
                                             QUrl::fromUserInput("qrc:/qml/QmlTest.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pQmlTest)));
-#endif
+//#endif
     }
     return _p->settingsList;
 }

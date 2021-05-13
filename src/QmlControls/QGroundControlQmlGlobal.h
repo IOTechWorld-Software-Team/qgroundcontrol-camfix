@@ -37,6 +37,8 @@ class MicrohardManager;
 #include "MockLink.h"
 #endif
 
+#include "ArysPasswordManager.h"
+
 class QGCToolbox;
 class LinkManager;
 
@@ -106,6 +108,8 @@ public:
     Q_PROPERTY(int      mavlinkSystemID         READ mavlinkSystemID            WRITE setMavlinkSystemID            NOTIFY mavlinkSystemIDChanged)
     Q_PROPERTY(bool     hasAPMSupport           READ hasAPMSupport              CONSTANT)
     Q_PROPERTY(bool     hasMAVLinkInspector     READ hasMAVLinkInspector        CONSTANT)
+
+    Q_PROPERTY(ArysPasswordManager* arysPasswordManager    READ    arysPasswordManager      CONSTANT)
 
 
 #if defined(QGC_ENABLE_PAIRING)
@@ -183,6 +187,8 @@ public:
 #else
     bool                    microhardSupported  () { return false; }
 #endif
+
+    ArysPasswordManager*    arysPasswordManager () { return _arysPasswordManager; }
 
     qreal zOrderTopMost             () { return 1000; }
     qreal zOrderWidgets             () { return 100; }
@@ -263,6 +269,8 @@ private:
 #if defined(QGC_ENABLE_PAIRING)
     PairingManager*         _pairingManager         = nullptr;
 #endif
+
+    ArysPasswordManager*    _arysPasswordManager    = nullptr;
 
     bool                    _skipSetupPage          = false;
     QStringList             _altitudeModeEnumString;

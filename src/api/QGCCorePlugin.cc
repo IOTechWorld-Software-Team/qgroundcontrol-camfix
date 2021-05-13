@@ -71,6 +71,8 @@ public:
         if(pQmlTest)
             delete pQmlTest;
 #endif
+        if(parysSettings)
+            delete parysSettings;
         if(defaultOptions)
             delete defaultOptions;
     }
@@ -95,6 +97,7 @@ public:
     QmlComponentInfo* pDebug                    = nullptr;
     QmlComponentInfo* pQmlTest                  = nullptr;
 #endif
+    QmlComponentInfo* parysSettings             = nullptr;
 
     QGCOptions*         defaultOptions          = nullptr;
     QVariantList        settingsList;
@@ -183,6 +186,9 @@ QVariantList &QGCCorePlugin::settingsPages()
                                             QUrl::fromUserInput("qrc:/qml/QmlTest.qml"));
         _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->pQmlTest)));
 #endif
+        _p->parysSettings = new QmlComponentInfo(tr("Arys Settings"),
+                                            QUrl::fromUserInput("qrc:/qml/ArysMiscSettings.qml"));
+        _p->settingsList.append(QVariant::fromValue(reinterpret_cast<QmlComponentInfo*>(_p->parysSettings)));
     }
     return _p->settingsList;
 }

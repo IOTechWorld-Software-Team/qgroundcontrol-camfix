@@ -431,6 +431,7 @@ HEADERS += \
     src/api/QGCOptions.h \
     src/api/QGCSettings.h \
     src/api/QmlComponentInfo.h \
+    src/api/ArysPasswordManager.h \
     src/GPS/Drivers/src/base_station.h \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
@@ -444,6 +445,7 @@ SOURCES += \
     src/api/QGCOptions.cc \
     src/api/QGCSettings.cc \
     src/api/QmlComponentInfo.cc \
+    src/api/ArysPasswordManager.cc \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     SOURCES += \
@@ -727,6 +729,7 @@ HEADERS += \
     src/uas/UASMessageHandler.h \
     src/AnalyzeView/GeoTagController.h \
     src/AnalyzeView/ExifParser.h \
+    src/Settings/ArysMiscSettings.h \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     HEADERS += \
@@ -962,6 +965,7 @@ SOURCES += \
     src/uas/UASMessageHandler.cc \
     src/AnalyzeView/GeoTagController.cc \
     src/AnalyzeView/ExifParser.cc \
+    src/Settings/ArysMiscSettings.cc \
 
 contains (DEFINES, QGC_ENABLE_PAIRING) {
     SOURCES += \

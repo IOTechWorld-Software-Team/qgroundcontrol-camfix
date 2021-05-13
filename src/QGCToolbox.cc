@@ -50,6 +50,8 @@
 #include CUSTOMHEADER
 #endif
 
+#include "ArysPasswordManager.h"
+
 QGCToolbox::QGCToolbox(QGCApplication* app)
 {
     // SettingsManager must be first so settings are available to any subsequent tools
@@ -92,6 +94,7 @@ QGCToolbox::QGCToolbox(QGCApplication* app)
 #if defined(QGC_GST_MICROHARD_ENABLED)
     _microhardManager       = new MicrohardManager          (app, this);
 #endif
+    _arysPasswordManager    = new ArysPasswordManager       (app, this);
 }
 
 void QGCToolbox::setChildToolboxes(void)
@@ -129,6 +132,7 @@ void QGCToolbox::setChildToolboxes(void)
 #if defined(QGC_ENABLE_PAIRING)
     _pairingManager->setToolbox(this);
 #endif
+    _arysPasswordManager->setToolbox(this);
 }
 
 void QGCToolbox::_scanAndLoadPlugins(QGCApplication* app)

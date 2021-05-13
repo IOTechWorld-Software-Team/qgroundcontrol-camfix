@@ -30,6 +30,9 @@
 #if defined(QGC_AIRMAP_ENABLED)
 #include "AirMapSettings.h"
 #endif
+
+#include "ArysMiscSettings.h"
+
 #include <QVariantList>
 
 /// Provides access to all app settings
@@ -58,6 +61,9 @@ public:
 #if !defined(NO_ARDUPILOT_DIALECT)
     Q_PROPERTY(QObject* apmMavlinkStreamRateSettings    READ apmMavlinkStreamRateSettings   CONSTANT)
 #endif
+
+    Q_PROPERTY(QObject* arysMiscSettings                READ arysMiscSettings               CONSTANT)
+    
     // Override from QGCTool
     virtual void setToolbox(QGCToolbox *toolbox);
 
@@ -79,6 +85,9 @@ public:
 #if !defined(NO_ARDUPILOT_DIALECT)
     APMMavlinkStreamRateSettings*   apmMavlinkStreamRateSettings(void) { return _apmMavlinkStreamRateSettings; }
 #endif
+
+    ArysMiscSettings*               arysMiscSettings(void)             { return _arysMiscSettings; }
+
 private:
 #if defined(QGC_AIRMAP_ENABLED)
     AirMapSettings*         _airMapSettings;
@@ -98,6 +107,8 @@ private:
 #if !defined(NO_ARDUPILOT_DIALECT)
     APMMavlinkStreamRateSettings*   _apmMavlinkStreamRateSettings;
 #endif
+
+    ArysMiscSettings*               _arysMiscSettings;
 };
 
 #endif

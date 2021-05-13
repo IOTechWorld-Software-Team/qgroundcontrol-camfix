@@ -68,6 +68,8 @@ void QGroundControlQmlGlobal::setToolbox(QGCToolbox* toolbox)
 #if defined(QGC_GST_MICROHARD_ENABLED)
     _microhardManager       = toolbox->microhardManager();
 #endif
+
+    _arysPasswordManager    = toolbox->arysPasswordManager();
 }
 
 void QGroundControlQmlGlobal::saveGlobalSetting (const QString& key, const QString& value)

@@ -439,6 +439,10 @@ ApplicationWindow {
                                     }
                                 }
 
+                                onDoubleClicked: {
+                                    pswdPopupLoader.source = "/toolbar/ArysPasswordRequest.qml"
+                                }
+
                                 MessageDialog {
                                     id:                 advancedModeConfirmation
                                     title:              qsTr("Advanced Mode")
@@ -455,6 +459,17 @@ ApplicationWindow {
                 }
             }
         }
+    }
+
+    Loader {
+        id:                 pswdPopupLoader
+        anchors.fill:       parent
+    }
+
+    Connections {
+        target:             pswdPopupLoader.item
+        onPasswordCorrect:  mainWindow.showSettingsTool()
+        onClosePopup:       pswdPopupLoader.source = ""
     }
 
     FlyView {

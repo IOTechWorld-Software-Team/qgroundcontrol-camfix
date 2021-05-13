@@ -1,0 +1,26 @@
+{
+    "version":      1,
+    "fileType":     "FactMetaData",
+    "QGC.MetaData.Facts":
+[
+{
+    "name":             "userPassword",
+    "shortDesc": "User paswword to acces advance mode",
+    "type":             "string",
+    "default":     "MasterAR"
+},
+{
+    "name":             "masterPasssword",
+    "shortDesc": "master paswword to override any other password",
+    "type":             "string",
+    "default":     "MasterAR"
+},
+{
+    "name":             "pswdNeeded",
+    "shortDesc": "Password is needed to acces settings menu.",
+    "longDesc":  "Select whether a password is needed to acces settings menu or not",
+    "type":             "bool",
+    "default":     true
+}
+]
+}

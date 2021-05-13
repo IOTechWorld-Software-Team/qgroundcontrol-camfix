@@ -44,6 +44,8 @@ class TaisyncManager;
 class MicrohardManager;
 #endif
 
+class ArysPasswordManager;
+
 /// This is used to manage all of our top level services/tools
 class QGCToolbox : public QObject {
     Q_OBJECT
@@ -82,6 +84,8 @@ public:
     MicrohardManager*           microhardManager        () { return _microhardManager; }
 #endif
 
+    ArysPasswordManager*        arysPasswordManager     () { return _arysPasswordManager; }
+
 private:
     void setChildToolboxes(void);
     void _scanAndLoadPlugins(QGCApplication *app);
@@ -118,6 +122,9 @@ private:
 #if defined(QGC_GST_MICROHARD_ENABLED)
     MicrohardManager*           _microhardManager       = nullptr;
 #endif
+
+    ArysPasswordManager*        _arysPasswordManager    = nullptr;
+
     friend class QGCApplication;
 };
 

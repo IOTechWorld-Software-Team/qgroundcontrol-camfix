@@ -601,11 +601,11 @@ void QGCApplication::_initCommon()
     qmlRegisterSingletonType<ShapeFileHelper>           ("MAVLink",                                 1, 0, "MAVLink",                mavlinkSingletonFactory);
 
     // Although this should really be in _initForNormalAppBoot putting it here allowws us to create unit tests which pop up more easily
-    if(QFontDatabase::addApplicationFont(":/fonts/opensans") < 0) {
-        qWarning() << "Could not load /fonts/opensans font";
+    if(QFontDatabase::addApplicationFont(":/fonts/Montserrat-Regular") < 0) {
+        qWarning() << "Could not load /fonts/Montserrat-Regular font";
     }
-    if(QFontDatabase::addApplicationFont(":/fonts/opensans-demibold") < 0) {
-        qWarning() << "Could not load /fonts/opensans-demibold font";
+    if(QFontDatabase::addApplicationFont(":/fonts/Montserrat-Semibold") < 0) {
+        qWarning() << "Could not load /fonts/Montserrat-Semibold font";
     }
 }
 

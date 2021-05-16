@@ -196,5 +196,17 @@
         <file alias="Yield.svg">src/ui/toolbar/Images/Yield.svg</file>
         <file alias="ZoomMinus.svg">src/FlightMap/Images/ZoomMinus.svg</file>
         <file alias="ZoomPlus.svg">src/FlightMap/Images/ZoomPlus.svg</file>
+        <file alias="GENERATOR.png">resources/icons-Arys/FLY/GENERATOR.png</file>
+        <file alias="PLAN.png">resources/icons-Arys/FLY/PLAN.png</file>
+        <file alias="RETURN.png">resources/icons-Arys/FLY/RETURN.png</file>
+        <file alias="TAKEOFF.png">resources/icons-Arys/FLY/TAKEOFF.png</file>
+        <file alias="SLIDE TO CONFIRM.png">resources/icons-Arys/FLY/_GENERATOR/SLIDE TO CONFIRM.png</file>
+        <file alias="CENTER.png">resources/icons-Arys/PLAN/CENTER.png</file>
+        <file alias="FILE.png">resources/icons-Arys/PLAN/FILE.png</file>
+        <file alias="FLY.png">resources/icons-Arys/PLAN/FLY.png</file>
+        <file alias="ROI.png">resources/icons-Arys/PLAN/ROI.png</file>
+        <file alias="SURVEY.png">resources/icons-Arys/PLAN/SURVEY.png</file>
+        <file alias="WAYPOINT.png">resources/icons-Arys/PLAN/WAYPOINT.png</file>
+        <file alias="OPTIONS.png">resources/icons-Arys/PLAN/_MISSION/OPTIONS.png</file>
     </qresource>
 </RCC>

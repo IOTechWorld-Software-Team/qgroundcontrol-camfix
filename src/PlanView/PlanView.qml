@@ -634,7 +634,7 @@ Item {
                 model: [
                     ToolStripAction {
                         text:           qsTr("Fly")
-                        iconSource:     "/qmlimages/PaperPlane.svg"
+                        iconSource:     "/qmlimages/FLY.png"
                         onTriggered:    mainWindow.showFlyView()
                     },
                     ToolStripAction {
@@ -642,13 +642,13 @@ Item {
                         enabled:                !_planMasterController.syncInProgress
                         visible:                true
                         showAlternateIcon:      _planMasterController.dirty
-                        iconSource:             "/qmlimages/MapSync.svg"
-                        alternateIconSource:    "/qmlimages/MapSyncChanged.svg"
+                        iconSource:             "/qmlimages/FILE.png"
+                        alternateIconSource:    "/qmlimages/FILE.png"
                         dropPanelComponent:     syncDropPanel
                     },
                     ToolStripAction {
                         text:       qsTr("Takeoff")
-                        iconSource: "/res/takeoff.svg"
+                        iconSource: "/qmlimages/TAKEOFF.png"
                         enabled:    _missionController.isInsertTakeoffValid
                         visible:    toolStrip._isMissionLayer && !_planMasterController.controllerVehicle.rover
                         onTriggered: {
@@ -659,14 +659,14 @@ Item {
                     ToolStripAction {
                         id:                 addWaypointRallyPointAction
                         text:               _editingLayer == _layerRallyPoints ? qsTr("Rally Point") : qsTr("Waypoint")
-                        iconSource:         "/qmlimages/MapAddMission.svg"
+                        iconSource:         "/qmlimages/WAYPOINT.png"
                         enabled:            toolStrip._isRallyLayer ? true : _missionController.flyThroughCommandsAllowed
                         visible:            toolStrip._isRallyLayer || toolStrip._isMissionLayer
                         checkable:          true
                     },
                     ToolStripAction {
                         text:               _missionController.isROIActive ? qsTr("Cancel ROI") : qsTr("ROI")
-                        iconSource:         "/qmlimages/MapAddMission.svg"
+                        iconSource:         "/qmlimages/ROI.png"
                         enabled:            !_missionController.onlyInsertTakeoffValid
                         visible:            toolStrip._isMissionLayer && _planMasterController.controllerVehicle.roiModeSupported
                         checkable:          !_missionController.isROIActive
@@ -682,7 +682,7 @@ Item {
                     },
                     ToolStripAction {
                         text:               _singleComplexItem ? _missionController.complexMissionItemNames[0] : qsTr("Pattern")
-                        iconSource:         "/qmlimages/MapDrawShape.svg"
+                        iconSource:         "/qmlimages/SURVEY.png"
                         enabled:            _missionController.flyThroughCommandsAllowed
                         visible:            toolStrip._isMissionLayer
                         // dropPanelComponent: _singleComplexItem ? undefined : patternDropPanel
@@ -695,7 +695,7 @@ Item {
                     },
                     ToolStripAction {
                         text:       _planMasterController.controllerVehicle.multiRotor ? qsTr("Return") : qsTr("Land")
-                        iconSource: "/res/rtl.svg"
+                        iconSource: "/qmlimages/RETURN.png"
                         enabled:    _missionController.isInsertLandValid
                         visible:    toolStrip._isMissionLayer
                         onTriggered: {
@@ -705,7 +705,7 @@ Item {
                     },
                     ToolStripAction {
                         text:               qsTr("Center")
-                        iconSource:         "/qmlimages/MapCenter.svg"
+                        iconSource:         "/qmlimages/CENTER.png"
                         enabled:            true
                         visible:            true
                         dropPanelComponent: centerMapDropPanel

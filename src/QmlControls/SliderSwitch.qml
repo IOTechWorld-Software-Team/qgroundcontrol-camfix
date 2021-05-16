@@ -50,7 +50,7 @@ Rectangle {
             mipmap:                 false
             color:                  qgcPal.buttonText
             cache:                  false
-            source:                 "/res/ArrowRight.svg"
+            source:                 "/qmlimages/SLIDE TO CONFIRM.png"
         }
 
     }

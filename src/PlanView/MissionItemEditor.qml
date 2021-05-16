@@ -188,7 +188,7 @@ Rectangle {
         width:                  _hamburgerSize
         height:                 _hamburgerSize
         sourceSize.height:      _hamburgerSize
-        source:                 "qrc:/qmlimages/Hamburger.svg"
+        source:                 "qrc:/qmlimages/OPTIONS.png"
         visible:                missionItem.isCurrentItem && missionItem.sequenceNumber !== 0
         color:                  qgcPal.text
 

@@ -20,7 +20,7 @@ ToolStripActionList {
     model: [
         ToolStripAction {
             text:           qsTr("Plan")
-            iconSource:     "/qmlimages/Plan.svg"
+            iconSource:     "/qmlimages/PLAN.png"
             onTriggered:    mainWindow.showPlanView()
         },
         GuidedActionGenerator { },

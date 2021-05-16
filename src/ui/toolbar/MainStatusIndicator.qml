@@ -32,13 +32,13 @@ RowLayout {
         text:           mainStatusText()
         font.pointSize: _vehicleInAir ? ScreenTools.defaultFontPointSize : ScreenTools.largeFontPointSize
 
-        property string _commLostText:      qsTr("Communication Lost")
-        property string _readyToFlyText:    qsTr("Ready To Fly")
-        property string _notReadyToFlyText: qsTr("Not Ready")
-        property string _disconnectedText:  qsTr("Disconnected")
-        property string _armedText:         qsTr("Armed")
-        property string _flyingText:        qsTr("Flying")
-        property string _landingText:       qsTr("Landing")
+        property string _commLostText:      qsTr("COMMUNICATION LOST")
+        property string _readyToFlyText:    qsTr("READY TO FLY")
+        property string _notReadyToFlyText: qsTr("NOT READY")
+        property string _disconnectedText:  qsTr("DISCONNECTED")
+        property string _armedText:         qsTr("ARMED")
+        property string _flyingText:        qsTr("FLYING")
+        property string _landingText:       qsTr("LANDING")
 
         function mainStatusText() {
             var statusText

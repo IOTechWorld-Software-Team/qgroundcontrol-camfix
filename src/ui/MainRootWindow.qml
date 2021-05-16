@@ -340,7 +340,7 @@ ApplicationWindow {
 
         QGCPopupDialog {
             id:         toolSelectDialog
-            title:      qsTr("Select Tool")
+            title:      qsTr("SELECT TOOL")
             buttons:    StandardButton.Close
 
             property real _toolButtonHeight:    ScreenTools.defaultFontPixelHeight * 3

@@ -615,7 +615,7 @@ Item {
             anchors.top:        parent.top
             z:                  QGroundControl.zOrderWidgets
             maxHeight:          parent.height - toolStrip.y
-            title:              qsTr("Plan")
+            title:              qsTr("PLAN")
 
             readonly property int flyButtonIndex:       0
             readonly property int fileButtonIndex:      1
@@ -813,14 +813,14 @@ Item {
                     visible:    (!planControlColapsed || !_airspaceEnabled) && QGroundControl.corePlugin.options.enablePlanViewSelector
                     Component.onCompleted: currentIndex = 0
                     QGCTabButton {
-                        text:       qsTr("Mission")
+                        text:       qsTr("MISSION")
                     }
                     QGCTabButton {
-                        text:       qsTr("Fence")
+                        text:       qsTr("FENCE")
                         enabled:    _geoFenceController.supported
                     }
                     QGCTabButton {
-                        text:       qsTr("Rally")
+                        text:       qsTr("RALLY")
                         enabled:    _rallyPointController.supported
                     }
                 }
@@ -1040,7 +1040,7 @@ Item {
             SectionHeader {
                 id:                 createSection
                 Layout.fillWidth:   true
-                text:               qsTr("Create Plan")
+                text:               qsTr("CREATE PLAN")
                 showSpacer:         false
             }
 
@@ -1111,7 +1111,7 @@ Item {
             SectionHeader {
                 id:                 storageSection
                 Layout.fillWidth:   true
-                text:               qsTr("Storage")
+                text:               qsTr("STORAGE")
             }
 
             GridLayout {
@@ -1189,7 +1189,7 @@ Item {
             SectionHeader {
                 id:                 vehicleSection
                 Layout.fillWidth:   true
-                text:               qsTr("Vehicle")
+                text:               qsTr("VEHICLE")
             }
 
             RowLayout {

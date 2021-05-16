@@ -32,7 +32,7 @@ Item {
     property bool   _currentItemIsVTOLTakeoff:  _currentMissionItemValid && _currentMissionItem.command == 84
     property bool   _missionValid:              missionItems !== undefined
 
-    property real   _dataFontSize:              ScreenTools.defaultFontPointSize
+    property real   _dataFontSize:              ScreenTools.smallFontPointSize
     property real   _largeValueWidth:           ScreenTools.defaultFontPixelWidth * 8
     property real   _mediumValueWidth:          ScreenTools.defaultFontPixelWidth * 4
     property real   _smallValueWidth:           ScreenTools.defaultFontPixelWidth * 3
@@ -135,9 +135,9 @@ Item {
             Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
             QGCLabel {
-                text:               qsTr("Selected Waypoint")
+                text:               qsTr("SELECTED WAYPOINT")
                 Layout.columnSpan:  8
-                font.pointSize:     ScreenTools.smallFontPointSize
+                font.pointSize:         ScreenTools.mediumFontPointSize * 0.7
             }
 
             QGCLabel { text: qsTr("Alt diff:"); font.pointSize: _dataFontSize; }
@@ -189,9 +189,9 @@ Item {
             Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
             QGCLabel {
-                text:               qsTr("Total Mission")
+                text:               qsTr("TOTAL MISSION")
                 Layout.columnSpan:  5
-                font.pointSize:     ScreenTools.smallFontPointSize
+                font.pointSize:         ScreenTools.mediumFontPointSize * 0.7
             }
 
             QGCLabel { text: qsTr("Distance:"); font.pointSize: _dataFontSize; }

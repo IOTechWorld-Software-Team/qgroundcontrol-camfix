@@ -67,8 +67,11 @@ Rectangle {
                 id:                     titleLabel
                 anchors.left:           parent.left
                 anchors.right:          parent.right
+                anchors.topMargin:      ScreenTools.defaultFontPixelHeight
+                anchors.bottomMargin:   ScreenTools.defaultFontPixelHeight
                 horizontalAlignment:    Text.AlignHCenter
-                font.pointSize:         ScreenTools.smallFontPointSize
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                font.family:            ScreenTools.demiboldFontFamily
                 visible:                title != ""
             }
 

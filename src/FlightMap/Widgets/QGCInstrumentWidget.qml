@@ -33,7 +33,7 @@ ColumnLayout {
         id:                 visualInstrument
         height:             _outerRadius * 2
         Layout.fillWidth:   true
-        radius:             _outerRadius
+        //radius:             _outerRadius
         color:              qgcPal.window
 
         DeadMouseArea { anchors.fill: parent }

@@ -72,7 +72,7 @@ Item {
     Rectangle {
         id:             borderRect
         anchors.fill:   parent
-        radius:         width / 2
+        //radius:         width / 2
         color:          qgcPal.window
         border.color:   qgcPal.text
         border.width:   1
@@ -189,7 +189,7 @@ Item {
     Rectangle {
         id:             mask
         anchors.fill:   instrument
-        radius:         width / 2
+        //radius:         width / 2
         color:          "black"
         visible:        false
     }

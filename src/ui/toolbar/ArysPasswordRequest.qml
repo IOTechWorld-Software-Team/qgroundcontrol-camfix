@@ -34,7 +34,7 @@ Item {
         background: Rectangle {
             anchors.fill:   parent
             color:          qgcPal.window
-            radius:         ScreenTools.defaultFontPixelHeight * 0.5
+            // radius:         ScreenTools.defaultFontPixelHeight * 0.5
         }
 
         contentItem: Item{
@@ -84,7 +84,7 @@ Item {
                     Layout.alignment:       Qt.AlignHCenter
                     Layout.preferredWidth:  ScreenTools.defaultFontPixelWidth * 15
                     text:                   qsTr("Enter")
-                    backRadius:             ScreenTools.defaultFontPixelHeight * 0.25
+                    // backRadius:             ScreenTools.defaultFontPixelHeight * 0.25
 
                     onClicked: {
                         if (QGroundControl.arysPasswordManager.checkCorrectPassword(pswdTextField.text)) {

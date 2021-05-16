@@ -129,7 +129,7 @@ Item {
         Rectangle {
             width:          mainLayout.width   + mainLayout.anchors.margins * 2
             height:         mainLayout.height  + mainLayout.anchors.margins * 2
-            radius:         ScreenTools.defaultFontPixelHeight / 2
+            // radius:         ScreenTools.defaultFontPixelHeight / 2
             color:          qgcPal.window
             border.color:   qgcPal.text
 

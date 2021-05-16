@@ -18,7 +18,7 @@ Rectangle {
     height:             warningsCol.height
     width:              warningsCol.width
     color:              Qt.rgba(1, 1, 1, 0.5)
-    radius:             ScreenTools.defaultFontPixelWidth / 2
+    // radius:             ScreenTools.defaultFontPixelWidth / 2
     visible:            _noGPSLockVisible || _prearmErrorVisible
 
     property var  _activeVehicle:       QGroundControl.multiVehicleManager.activeVehicle

@@ -34,7 +34,7 @@ Item {
         Rectangle {
             width:  telemCol.width   + ScreenTools.defaultFontPixelWidth  * 3
             height: telemCol.height  + ScreenTools.defaultFontPixelHeight * 2
-            radius: ScreenTools.defaultFontPixelHeight * 0.5
+            // radius: ScreenTools.defaultFontPixelHeight * 0.5
             color:  qgcPal.window
             border.color:   qgcPal.text
             Column {

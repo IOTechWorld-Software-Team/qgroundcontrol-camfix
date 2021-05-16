@@ -18,7 +18,7 @@ Rectangle {
     height:     visible ? (editorColumn.height + (_margin * 2)) : 0
     width:      availableWidth
     color:      qgcPal.windowShadeDark
-    radius:     _radius
+    // radius:     _radius
 
     // The following properties must be available up the hierarchy chain
     //property real   availableWidth    ///< Width for control

@@ -24,7 +24,7 @@ QGCButton {
         anchors.verticalCenter: parent.verticalCenter
         width:                  radius * 2
         height:                 width
-        radius:                 (ScreenTools.defaultFontPixelHeight * .75) / 2
+        // radius:                 (ScreenTools.defaultFontPixelHeight * .75) / 2
         color:                  "red"
         visible:                enabled && !indicatorGreen
     }

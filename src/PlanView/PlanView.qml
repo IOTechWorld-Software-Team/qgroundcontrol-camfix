@@ -764,7 +764,7 @@ Item {
                     width:      parent.width
                     height:     planControlColapsed ? colapsedRow.height + ScreenTools.defaultFontPixelHeight : 0
                     color:      qgcPal.missionItemEditor
-                    radius:     _radius
+                    // radius:     _radius
                     visible:    planControlColapsed && _airspaceEnabled
                     Row {
                         id:                     colapsedRow

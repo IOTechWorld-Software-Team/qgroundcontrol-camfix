@@ -42,7 +42,7 @@ Item {
 
     Rectangle {
         anchors.fill:    parent
-        radius:         _radius
+        // radius:         _radius
         color:          QGroundControl.globalPalette.toolbarBackground
     }
 

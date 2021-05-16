@@ -79,7 +79,7 @@ Item {
         Rectangle {
             width:          mainWindow.width  * 0.666
             height:         mainWindow.height * 0.666
-            radius:         ScreenTools.defaultFontPixelHeight / 2
+            // radius:         ScreenTools.defaultFontPixelHeight / 2
             color:          qgcPal.window
             border.color:   qgcPal.text
 

@@ -18,7 +18,7 @@ Rectangle {
     height:             valuesColumn.height + (_margin * 2)
     color:              qgcPal.windowShadeDark
     visible:            missionItem.isCurrentItem
-    radius:             _radius
+    // radius:             _radius
 
     property var    _masterControler:               masterController
     property var    _missionController:             _masterControler.missionController

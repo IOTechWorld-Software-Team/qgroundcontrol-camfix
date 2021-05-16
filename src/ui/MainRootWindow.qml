@@ -603,7 +603,7 @@ ApplicationWindow {
         background: Rectangle {
             anchors.fill:   parent
             color:          qgcPal.alertBackground
-            radius:         ScreenTools.defaultFontPixelHeight * 0.5
+            // radius:         ScreenTools.defaultFontPixelHeight * 0.5
             border.color:   qgcPal.alertBorder
             border.width:   2
         }

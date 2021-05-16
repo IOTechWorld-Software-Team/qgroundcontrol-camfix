@@ -15,7 +15,7 @@ Rectangle {
     width:  availableWidth
     height: editorColumn.height + (_margin * 2)
     color:  qgcPal.windowShadeDark
-    radius: _radius
+    // radius: _radius
 
     property bool _specifiesAltitude:       missionItem.specifiesAltitude
     property real _margin:                  ScreenTools.defaultFontPixelHeight / 2

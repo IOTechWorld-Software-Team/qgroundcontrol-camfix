@@ -20,7 +20,7 @@ Rectangle {
     color:      qgcPal.toolbarBackground
     width:      _idealWidth < repeater.contentWidth ? repeater.contentWidth : _idealWidth
     height:     Math.min(maxHeight, toolStripColumn.height + (flickable.anchors.margins * 2))
-    radius:     ScreenTools.defaultFontPixelWidth / 2
+    // radius:     ScreenTools.defaultFontPixelWidth / 2
 
     property alias  model:              repeater.model
     property real   maxHeight           ///< Maximum height for control, determines whether text is hidden to make control shorter
@@ -80,7 +80,7 @@ Rectangle {
                     anchors.left:       toolStripColumn.left
                     anchors.right:      toolStripColumn.right
                     height:             width
-                    radius:             ScreenTools.defaultFontPixelWidth / 2
+                    // radius:             ScreenTools.defaultFontPixelWidth / 2
                     fontPointSize:      ScreenTools.smallFontPointSize
                     toolStripAction:    modelData
                     dropPanel:          _dropPanel

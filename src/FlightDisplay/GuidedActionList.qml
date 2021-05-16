@@ -22,7 +22,7 @@ Rectangle {
     id:         _root
     width:      actionColumn.width  + (_margins * 4)
     height:     actionColumn.height + (_margins * 4)
-    radius:     _margins / 2
+    // radius:     _margins / 2
     color:      qgcPal.window
     opacity:    0.9
     visible:    false

@@ -18,7 +18,7 @@ import QGroundControl.Palette       1.0
 
 Rectangle {
     height: _outerRadius * 4
-    radius: _outerRadius
+    // radius: _outerRadius
     color:  QGroundControl.globalPalette.window
 
     property real _outerMargin: (width * 0.05) / 2

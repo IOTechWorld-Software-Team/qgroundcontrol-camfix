@@ -22,7 +22,7 @@ Switch {
             implicitWidth:  ScreenTools.defaultFontPixelWidth * 6
             implicitHeight: ScreenTools.defaultFontPixelHeight
             color:          (control.checked && control.enabled) ? qgcPal.colorGreen : qgcPal.colorGrey
-            radius:         3
+            // radius:         3
             border.color:   qgcPal.button
             border.width:   1
         }

@@ -35,7 +35,7 @@ Item {
         Rectangle {
             width:  rcrssiCol.width   + ScreenTools.defaultFontPixelWidth  * 3
             height: rcrssiCol.height  + ScreenTools.defaultFontPixelHeight * 2
-            radius: ScreenTools.defaultFontPixelHeight * 0.5
+            // radius: ScreenTools.defaultFontPixelHeight * 0.5
             color:  qgcPal.window
             border.color:   qgcPal.text
 

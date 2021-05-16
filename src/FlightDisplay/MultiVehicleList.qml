@@ -34,7 +34,7 @@ Item {
         height:         mvCommandsColumn.height + (_margin *2)
         color:          qgcPal.missionItemEditor
         opacity:        _rectOpacity
-        radius:         _margin
+        // radius:         _margin
 
         DeadMouseArea {
             anchors.fill: parent
@@ -93,7 +93,7 @@ Item {
             height:     innerColumn.y + innerColumn.height + _margin
             color:      qgcPal.missionItemEditor
             opacity:    _rectOpacity
-            radius:     _margin
+            // radius:     _margin
 
             property var    _vehicle:   object
 

@@ -556,7 +556,7 @@ FlightMap {
         model:              _airspaceEnabled && QGroundControl.settingsManager.airMapSettings.enableAirspace && QGroundControl.airspaceManager.airspaceVisible ? QGroundControl.airspaceManager.airspaces.circles : []
         delegate: MapCircle {
             center:         object.center
-            radius:         object.radius
+            // radius:         object.radius
             color:          object.color
             border.color:   object.lineColor
             border.width:   object.lineWidth

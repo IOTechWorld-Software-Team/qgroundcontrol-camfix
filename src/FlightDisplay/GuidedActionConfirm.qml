@@ -20,7 +20,7 @@ Rectangle {
     id:                     _root
     Layout.minimumWidth:    mainLayout.width + (_margins * 2)
     Layout.preferredHeight: mainLayout.height + (_margins * 2)
-    radius:                 ScreenTools.defaultFontPixelWidth / 2
+    // radius:                 ScreenTools.defaultFontPixelWidth / 2
     color:                  qgcPal.windowShadeLight
     visible:                false
 

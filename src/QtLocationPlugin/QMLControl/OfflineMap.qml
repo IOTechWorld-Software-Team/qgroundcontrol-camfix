@@ -464,7 +464,7 @@ Item {
                 width:              tileInfoColumn.width  + (ScreenTools.defaultFontPixelWidth  * 2)
                 height:             tileInfoColumn.height + (ScreenTools.defaultFontPixelHeight * 2)
                 color:              Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.85)
-                radius:             ScreenTools.defaultFontPixelWidth * 0.5
+                // radius:             ScreenTools.defaultFontPixelWidth * 0.5
                 visible:            false
 
                 property bool       _extraButton: {
@@ -737,7 +737,7 @@ Item {
             width:              ScreenTools.defaultFontPixelWidth * (ScreenTools.isTinyScreen ? 24 : 28)
             height:             Math.min(parent.height - (anchors.margins * 2), addNewSetFlickable.y + addNewSetColumn.height + addNewSetLabel.anchors.margins)
             color:              Qt.rgba(qgcPal.window.r, qgcPal.window.g, qgcPal.window.b, 0.85)
-            radius:             ScreenTools.defaultFontPixelWidth * 0.5
+            // radius:             ScreenTools.defaultFontPixelWidth * 0.5
 
             //-- Eat mouse events
             DeadMouseArea {
@@ -830,7 +830,7 @@ Item {
                         height:         zoomColumn.height + ScreenTools.defaultFontPixelHeight * 0.5
                         color:          qgcPal.window
                         border.color:   qgcPal.text
-                        radius:         ScreenTools.defaultFontPixelWidth * 0.5
+                        // radius:         ScreenTools.defaultFontPixelWidth * 0.5
 
                         Column {
                             id:                 zoomColumn
@@ -875,7 +875,7 @@ Item {
                                     y: sliderMinZoom.topPadding  + sliderMinZoom.availableHeight * 0.5 - height * 0.5
                                     implicitWidth:  sliderTouchArea
                                     implicitHeight: sliderTouchArea
-                                    radius:         sliderTouchArea * 0.5
+                                    // radius:         sliderTouchArea * 0.5
                                     color:          qgcPal.button
                                     border.width:   1
                                     border.color:   qgcPal.buttonText
@@ -918,7 +918,7 @@ Item {
                                     y: sliderMaxZoom.topPadding  + sliderMaxZoom.availableHeight * 0.5 - height * 0.5
                                     implicitWidth:  sliderTouchArea
                                     implicitHeight: sliderTouchArea
-                                    radius:         sliderTouchArea * 0.5
+                                    // radius:         sliderTouchArea * 0.5
                                     color:          qgcPal.button
                                     border.width:   1
                                     border.color:   qgcPal.buttonText
@@ -1159,7 +1159,7 @@ Item {
             anchors.fill:   parent
             color:          qgcPal.windowShadeDark
             border.color:   qgcPal.text
-            radius:         ScreenTools.defaultFontPixelWidth
+            // radius:         ScreenTools.defaultFontPixelWidth
         }
         Column {
             id:                 exportCol
@@ -1213,7 +1213,7 @@ Item {
             anchors.fill:   parent
             color:          qgcPal.windowShadeDark
             border.color:   qgcPal.text
-            radius:         ScreenTools.defaultFontPixelWidth
+            // radius:         ScreenTools.defaultFontPixelWidth
         }
         Column {
             id:                 importCol

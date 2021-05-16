@@ -222,7 +222,7 @@ SetupPage {
                         border.width:       1
                         implicitWidth:      _radius * 2
                         implicitHeight:     _radius * 2
-                        radius:             _radius
+                        // radius:             _radius
 
                         property real _radius: Math.round(ScreenTools.defaultFontPixelHeight * 0.35)
                     }

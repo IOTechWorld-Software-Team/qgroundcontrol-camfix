@@ -149,7 +149,7 @@ RowLayout {
         Rectangle {
             width:          flickable.width + (_margins * 2)
             height:         flickable.height + (_margins * 2)
-            radius:         ScreenTools.defaultFontPixelHeight * 0.5
+            // radius:         ScreenTools.defaultFontPixelHeight * 0.5
             color:          qgcPal.window
             border.color:   qgcPal.text
 
@@ -229,7 +229,7 @@ RowLayout {
         Rectangle {
             width:          mainLayout.width   + (_margins * 2)
             height:         mainLayout.height  + (_margins * 2)
-            radius:         ScreenTools.defaultFontPixelHeight * 0.5
+            // radius:         ScreenTools.defaultFontPixelHeight * 0.5
             color:          qgcPal.window
             border.color:   qgcPal.text
 

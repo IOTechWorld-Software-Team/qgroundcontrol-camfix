@@ -111,7 +111,7 @@ MapQuickItem {
             color:              Qt.rgba(1,1,1,0)
             border.color:       Qt.rgba(1,1,1,1)
             border.width:       5
-            radius:             width * 0.5
+            // radius:             width * 0.5
 
             transform: Rotation {
                 origin.x:       detectionLimitCircle.width  / 2

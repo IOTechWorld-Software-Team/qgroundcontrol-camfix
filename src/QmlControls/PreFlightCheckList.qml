@@ -19,7 +19,7 @@ Rectangle {
     width:  mainColumn.width + 3*ScreenTools.defaultFontPixelWidth
     height: mainColumn.height + ScreenTools.defaultFontPixelHeight
     color:  qgcPal.windowShade
-    radius: 3
+    // radius: 3
 
     property alias model: checkListRepeater.model
 

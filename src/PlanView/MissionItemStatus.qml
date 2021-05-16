@@ -20,7 +20,7 @@ import QGroundControl.FactControls  1.0
 
 Rectangle {
     id:         root
-    radius:     ScreenTools.defaultFontPixelWidth * 0.5
+    // radius:     ScreenTools.defaultFontPixelWidth * 0.5
     color:      qgcPal.window
     opacity:    0.80
     clip:       true

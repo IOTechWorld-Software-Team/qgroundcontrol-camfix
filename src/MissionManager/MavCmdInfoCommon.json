@@ -1130,6 +1130,19 @@
         },
         { "id": 30001, "rawName": "MAV_CMD_PAYLOAD_PREPARE_DEPLOY", "friendlyName": "Payload prepare deploy" },
         { "id": 30002, "rawName": "MAV_CMD_PAYLOAD_CONTROL_DEPLOY", "friendlyName": "Payload control deploy" },
-        { "id": 31003, "rawName": "MAV_CMD_WAYPOINT_USER_4", "friendlyName": "Mav cmd user 4" }
+        { 
+            "id": 31003,
+            "rawName":              "MAV_CMD_WAYPOINT_USER_4",
+            "friendlyName":         "Mav cmd user 4",
+            "description":          "Absoulte pressure to exit waypoint.",
+            "specifiesCoordinate":  false,
+            "friendlyEdit":         true,
+            "category":             "Advanced",
+            "param1": {
+                "label":            "Pss",
+                "default":          908,
+                "decimalPlaces":    0
+            }
+        }
     ]
 }

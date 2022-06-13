@@ -49,6 +49,7 @@ APMCopterMode::APMCopterMode(uint32_t mode, bool settable) :
         { AUTOROTATE,   "AutoRotate" },
         { AUTO_RTL,     "AutoRTL" },
         { TURTLE,       "Turtle" },
+        { CUSTOM,       "Custom" },
     });
 }
 
@@ -82,6 +83,7 @@ ArduCopterFirmwarePlugin::ArduCopterFirmwarePlugin(void)
         APMCopterMode(APMCopterMode::AUTOROTATE,    true),
         APMCopterMode(APMCopterMode::AUTO_RTL,      true),
         APMCopterMode(APMCopterMode::TURTLE,        true),
+        APMCopterMode(APMCopterMode::CUSTOM,        true),
     });
 
     if (!_remapParamNameIntialized) {

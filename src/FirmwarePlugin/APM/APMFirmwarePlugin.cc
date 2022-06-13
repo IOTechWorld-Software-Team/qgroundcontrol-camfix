@@ -152,6 +152,7 @@ void APMFirmwarePlugin::_handleIncomingParamValue(Vehicle* vehicle, mavlink_mess
 
     memset(&paramValue, 0, sizeof(paramValue));
 
+    // This is interesting
     // APM stack passes all parameter values in mavlink_param_union_t.param_float no matter what
     // type they are. Fix that up to correct usage.
 
@@ -554,6 +555,7 @@ QList<MAV_CMD> APMFirmwarePlugin::supportedMissionCommands(QGCMAVLink::VehicleCl
         MAV_CMD_DO_GRIPPER,
         MAV_CMD_DO_GUIDED_LIMITS,
         MAV_CMD_DO_AUTOTUNE_ENABLE,
+        MAV_CMD_WAYPOINT_USER_4,
     };
 
     QList<MAV_CMD> vtolCommands = {

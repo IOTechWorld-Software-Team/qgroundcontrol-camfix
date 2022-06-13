@@ -127,7 +127,7 @@ Map {
 
         sourceItem: Image {
             id:             mapItemImage
-            source:         "/res/SubUASLogo"
+            source:         "/res/SubUASHomeLightOrange"
             mipmap:         true
             antialiasing:   true
             fillMode:       Image.PreserveAspectFit

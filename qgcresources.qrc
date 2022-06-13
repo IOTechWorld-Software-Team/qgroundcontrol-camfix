@@ -46,6 +46,8 @@
         <file alias="Stop">resources/Stop.svg</file>
         <file alias="SubUASLogo">resources/SubUASLogo.png</file>
         <file alias="SubUASBrandingLogo">resources/SubUASBrandingLogo.png</file>
+        <file alias="SubUASHomeLightOrange">resources/SubUASHomeLightOrange.png</file>
+        <file alias="SubUASHomeWhite">resources/SubUASHomeWhite.png</file>
         <file alias="takeoff.svg">resources/takeoff.svg</file>
         <file alias="TrashDelete.svg">resources/TrashDelete.svg</file>
         <file alias="waves.svg">resources/waves.svg</file>

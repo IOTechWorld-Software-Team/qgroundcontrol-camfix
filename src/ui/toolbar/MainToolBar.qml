@@ -62,7 +62,7 @@ Rectangle {
         anchors.bottomMargin:   1
         anchors.top:            parent.top
         anchors.bottom:         parent.bottom
-        spacing:                ScreenTools.defaultFontPixelWidth / 2
+        spacing:                ScreenTools.defaultFontPixelWidth
 
         QGCToolBarButton {
             id:                     currentButton

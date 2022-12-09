@@ -325,6 +325,12 @@
     "longDesc":  "Host name to forward mavlink to. i.e: localhost:14445",
     "type":             "string",
     "default":     "localhost:14445"
+},
+{
+    "name":         "hideFlyViewPanels",
+    "shortDesc":    "Hide fly view panels",
+    "type":         "bool",
+    "default":      false
 }
 ]
 }

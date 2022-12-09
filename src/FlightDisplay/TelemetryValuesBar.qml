@@ -34,7 +34,7 @@ Rectangle {
         anchors.left:       parent.left
 
          RowLayout {
-            visible: mouseArea.containsMouse || valueArea.settingsUnlocked
+            visible: false //mouseArea.containsMouse || valueArea.settingsUnlocked
 
             QGCColoredImage {
                 source:             "/res/layout-bottom.svg"

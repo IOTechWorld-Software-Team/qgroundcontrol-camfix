@@ -48,22 +48,11 @@ T.HorizontalFactValueGrid {
                     model: _root.columns
 
                     GridLayout {
-                        rows:           object.count
-                        columns:        2
+                        rows:           2
+                        columns:        4
                         rowSpacing:     0
-                        columnSpacing:  ScreenTools.defaultFontPixelWidth / 4
+                        columnSpacing:  ScreenTools.defaultFontPixelWidth
                         flow:           GridLayout.TopToBottom
-
-                        Repeater {
-                            id:     labelRepeater
-                            model:  object
-
-                            InstrumentValueLabel {
-                                Layout.fillHeight:      true
-                                Layout.alignment:       Qt.AlignRight
-                                instrumentValueData:    object
-                            }
-                        }
 
                         Repeater {
                             id:     valueRepeater
@@ -81,26 +70,35 @@ T.HorizontalFactValueGrid {
                                 maxWidth = Math.min(maxWidth, newMaxWidth)
                             }
 
-                            InstrumentValueValue {
-                                Layout.fillHeight:      true
-                                Layout.alignment:       Qt.AlignLeft
-                                Layout.preferredWidth:  valueRepeater.maxWidth
-                                instrumentValueData:    object
-
-                                property real lastContentWidth
-
-                                Component.onCompleted:  {
-                                    valueRepeater.maxWidth = Math.max(valueRepeater.maxWidth, contentWidth)
-                                    lastContentWidth = contentWidth
+                            RowLayout {
+                                
+                                InstrumentValueLabel {
+                                    Layout.fillHeight:      true
+                                    Layout.alignment:       Qt.AlignRight
+                                    instrumentValueData:    object
                                 }
 
-                                onContentWidthChanged: {
-                                    valueRepeater.maxWidth = Math.max(valueRepeater.maxWidth, contentWidth)
-                                    lastContentWidth = contentWidth
-                                    var currentTime = new Date().getTime()
-                                    if (currentTime - valueRepeater.lastCheck > 30 * 1000) {
-                                        valueRepeater.lastCheck = currentTime
-                                        valueRepeater.recalcWidth()
+                                InstrumentValueValue {
+                                    Layout.fillHeight:      true
+                                    Layout.alignment:       Qt.AlignLeft
+                                    Layout.preferredWidth:  valueRepeater.maxWidth
+                                    instrumentValueData:    object
+
+                                    property real lastContentWidth
+
+                                    Component.onCompleted:  {
+                                        valueRepeater.maxWidth = Math.max(valueRepeater.maxWidth, contentWidth)
+                                        lastContentWidth = contentWidth
+                                    }
+
+                                    onContentWidthChanged: {
+                                        valueRepeater.maxWidth = Math.max(valueRepeater.maxWidth, contentWidth)
+                                        lastContentWidth = contentWidth
+                                        var currentTime = new Date().getTime()
+                                        if (currentTime - valueRepeater.lastCheck > 30 * 1000) {
+                                            valueRepeater.lastCheck = currentTime
+                                            valueRepeater.recalcWidth()
+                                        }
                                     }
                                 }
                             }
